@@ -508,193 +508,6 @@
       margin-bottom: 0;
     }
     
-    .delete-photo-btn {
-      position: absolute;
-      top: 10px;
-      right: 10px;
-      background: rgba(255, 0, 0, 0.8);
-      color: white;
-      border: none;
-      width: 30px;
-      height: 30px;
-      border-radius: 50%;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 14px;
-      opacity: 0;
-      transition: var(--transition);
-      z-index: 10;
-    }
-    
-    .gallery-item:hover .delete-photo-btn {
-      opacity: 1;
-    }
-    
-    .delete-photo-btn:hover {
-      background: rgba(255, 0, 0, 1);
-      transform: scale(1.1);
-    }
-    
-    /* OWNER PHOTO UPLOAD FORM */
-    .owner-upload-section {
-      background: white;
-      padding: 40px;
-      border-radius: 15px;
-      box-shadow: var(--shadow);
-      margin-bottom: 50px;
-      border: 3px solid var(--primary);
-    }
-    
-    .owner-upload-section h3 {
-      text-align: center;
-      color: var(--dark);
-      margin-bottom: 25px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-    }
-    
-    .owner-upload-section h3 i {
-      color: var(--primary);
-    }
-    
-    .owner-controls {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 20px;
-      padding-bottom: 15px;
-      border-bottom: 2px solid #eee;
-    }
-    
-    .owner-status {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      color: var(--secondary);
-      font-weight: 500;
-    }
-    
-    .owner-status i {
-      color: #28a745;
-    }
-    
-    .toggle-upload {
-      background: var(--secondary);
-      color: white;
-      border: none;
-      padding: 8px 20px;
-      border-radius: 20px;
-      cursor: pointer;
-      font-weight: 500;
-      transition: var(--transition);
-    }
-    
-    .toggle-upload:hover {
-      background: var(--primary);
-    }
-    
-    .upload-form-row {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 20px;
-      margin-bottom: 20px;
-    }
-    
-    .upload-form-group {
-      margin-bottom: 20px;
-    }
-    
-    .upload-form-group.full-width {
-      grid-column: 1 / -1;
-    }
-    
-    .upload-form-group label {
-      display: block;
-      margin-bottom: 8px;
-      font-weight: 500;
-      color: var(--dark);
-    }
-    
-    .upload-form-group input,
-    .upload-form-group select,
-    .upload-form-group textarea {
-      width: 100%;
-      padding: 12px 15px;
-      border: 1px solid #ddd;
-      border-radius: 8px;
-      font-family: 'Poppins', sans-serif;
-      font-size: 1rem;
-      transition: var(--transition);
-    }
-    
-    .upload-form-group input:focus,
-    .upload-form-group select:focus,
-    .upload-form-group textarea:focus {
-      outline: none;
-      border-color: var(--primary);
-      box-shadow: 0 0 0 3px rgba(255, 122, 24, 0.1);
-    }
-    
-    .upload-form-group textarea {
-      min-height: 100px;
-      resize: vertical;
-    }
-    
-    .file-upload-area {
-      border: 2px dashed #ddd;
-      border-radius: 10px;
-      padding: 40px;
-      text-align: center;
-      transition: var(--transition);
-      cursor: pointer;
-    }
-    
-    .file-upload-area:hover {
-      border-color: var(--primary);
-      background: rgba(255, 122, 24, 0.05);
-    }
-    
-    .file-upload-area.dragover {
-      border-color: var(--secondary);
-      background: rgba(26, 95, 180, 0.05);
-    }
-    
-    .file-upload-area i {
-      font-size: 3rem;
-      color: var(--secondary);
-      margin-bottom: 15px;
-    }
-    
-    .file-upload-area p {
-      margin-bottom: 10px;
-    }
-    
-    .file-input {
-      display: none;
-    }
-    
-    .upload-preview {
-      margin-top: 20px;
-      text-align: center;
-    }
-    
-    .upload-preview img {
-      max-width: 200px;
-      max-height: 150px;
-      border-radius: 10px;
-      margin-bottom: 10px;
-      box-shadow: var(--shadow);
-    }
-    
-    .file-info {
-      font-size: 0.9rem;
-      color: var(--gray);
-    }
-    
     /* Review Photo Upload */
     .review-photo-upload {
       background: #f8f9fa;
@@ -1333,10 +1146,6 @@
         grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
       }
       
-      .upload-form-row {
-        grid-template-columns: 1fr;
-      }
-      
       .date-picker-row {
         grid-template-columns: 1fr;
       }
@@ -1422,9 +1231,7 @@
         height: 250px;
       }
       
-      .review-form-container,
-      .owner-upload-section,
-      .photo-upload-container {
+      .review-form-container {
         padding: 25px;
       }
       
@@ -1438,12 +1245,6 @@
       
       .gallery-item {
         height: 200px;
-      }
-      
-      .owner-controls {
-        flex-direction: column;
-        gap: 15px;
-        align-items: flex-start;
       }
     }
   </style>
@@ -1770,71 +1571,11 @@
     </div>
   </section>
 
-  <!-- UPDATED GALLERY SECTION WITH OWNER-ONLY UPLOAD -->
+  <!-- GALLERY SECTION WITHOUT UPLOAD FORM -->
   <section class="gallery-section" id="gallery">
     <div class="container">
       <h2 class="section-title">Our Travel Gallery</h2>
-      <p style="text-align: center; max-width: 800px; margin: 0 auto 40px;">Browse photos from our amazing trips! All photos are uploaded by the GlobeTrek team to showcase our travel experiences.</p>
-      
-      <!-- OWNER PHOTO UPLOAD FORM (Owner Only) -->
-      <div class="owner-upload-section" id="ownerUploadSection">
-        <div class="owner-controls">
-          <div class="owner-status">
-            <i class="fas fa-user-shield"></i>
-            <span>Owner Upload Mode: <strong id="uploadModeStatus">ON</strong></span>
-          </div>
-          <button class="toggle-upload" id="toggleUpload">
-            <span id="toggleText">Hide Upload Form</span>
-          </button>
-        </div>
-        
-        <div id="ownerUploadFormContainer">
-          <h3><i class="fas fa-camera"></i> Upload Gallery Photos</h3>
-          <p style="text-align: center; margin-bottom: 25px;">As the website owner, you can upload unlimited photos to the gallery. These photos will be visible to all visitors.</p>
-          
-          <form id="ownerPhotoUploadForm">
-            <div class="upload-form-row">
-              <div class="upload-form-group">
-                <label for="ownerPhotoTitle">Photo Title *</label>
-                <input type="text" id="ownerPhotoTitle" name="ownerPhotoTitle" placeholder="e.g., Table Mountain Hike" required>
-              </div>
-              
-              <div class="upload-form-group">
-                <label for="ownerPhotoDestination">Destination *</label>
-                <select id="ownerPhotoDestination" name="ownerPhotoDestination" required>
-                  <option value="">Select destination</option>
-                  <option value="cape-town">Cape Town</option>
-                  <option value="mpumalanga">Mpumalanga</option>
-                  <option value="beach">Beach Destinations</option>
-                  <option value="safari">Safari</option>
-                  <option value="other">Other</option>
-                </select>
-              </div>
-            </div>
-            
-            <div class="upload-form-group">
-              <label for="ownerPhotoDescription">Photo Description</label>
-              <textarea id="ownerPhotoDescription" name="ownerPhotoDescription" placeholder="Tell us about this photo..."></textarea>
-            </div>
-            
-            <div class="upload-form-group full-width">
-              <label>Upload Photo *</label>
-              <div class="file-upload-area" id="ownerFileUploadArea">
-                <i class="fas fa-cloud-upload-alt"></i>
-                <p><strong>Click to upload or drag and drop</strong></p>
-                <p>JPEG, PNG or JPG (Max 5MB)</p>
-                <input type="file" id="ownerPhotoFile" name="ownerPhotoFile" accept="image/*" class="file-input" required>
-              </div>
-              <div class="upload-preview" id="ownerUploadPreview"></div>
-            </div>
-            
-            <button type="submit" class="btn" style="width: 100%; padding: 15px; font-size: 1.1rem;">
-              <span id="ownerUploadButtonText">Upload to Gallery</span>
-              <span id="ownerUploadSpinner" style="display: none; margin-left: 10px;" class="loading"></span>
-            </button>
-          </form>
-        </div>
-      </div>
+      <p style="text-align: center; max-width: 800px; margin: 0 auto 40px;">Browse photos from our amazing trips! All photos are managed by the GlobeTrek team.</p>
       
       <!-- Gallery Filter -->
       <div class="gallery-filter">
@@ -1847,11 +1588,11 @@
       
       <!-- Gallery Grid -->
       <div class="gallery-grid" id="galleryGrid">
-        <!-- Gallery items will be loaded here from localStorage -->
+        <!-- Gallery items will be loaded from predefined data -->
         <div class="no-photos" id="noPhotos">
           <i class="fas fa-camera"></i>
-          <h3>No Photos Yet</h3>
-          <p>The owner hasn't uploaded any photos to the gallery yet.</p>
+          <h3>Gallery Coming Soon</h3>
+          <p>Our team is curating the best photos from our trips.</p>
           <p style="font-size: 0.9rem; margin-top: 10px;">Check back soon for amazing travel photos!</p>
         </div>
       </div>
@@ -2264,51 +2005,68 @@
       });
     });
     
-    // ==================== OWNER PHOTO UPLOAD FUNCTIONALITY ====================
+    // ==================== GALLERY DATA (Predefined - Backend Managed) ====================
     
-    // Toggle owner upload form visibility
-    const toggleUploadBtn = document.getElementById('toggleUpload');
-    const toggleText = document.getElementById('toggleText');
-    const ownerUploadFormContainer = document.getElementById('ownerUploadFormContainer');
-    const uploadModeStatus = document.getElementById('uploadModeStatus');
-    let isUploadFormVisible = true;
-    
-    toggleUploadBtn.addEventListener('click', function(e) {
-      e.preventDefault();
-      isUploadFormVisible = !isUploadFormVisible;
-      
-      if (isUploadFormVisible) {
-        ownerUploadFormContainer.style.display = 'block';
-        toggleText.textContent = 'Hide Upload Form';
-        uploadModeStatus.textContent = 'ON';
-        uploadModeStatus.style.color = '#28a745';
-      } else {
-        ownerUploadFormContainer.style.display = 'none';
-        toggleText.textContent = 'Show Upload Form';
-        uploadModeStatus.textContent = 'OFF';
-        uploadModeStatus.style.color = '#dc3545';
+    // Predefined gallery photos (these would be managed from backend in a real application)
+    const galleryPhotos = [
+      {
+        id: 1,
+        title: "Table Mountain Adventure",
+        category: "cape-town",
+        description: "Breathtaking view from the top of Table Mountain",
+        imageUrl: "https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
+        date: "2025-10-15"
+      },
+      {
+        id: 2,
+        title: "Mpumalanga Panorama View",
+        category: "mpumalanga",
+        description: "God's Window viewpoint in Mpumalanga",
+        imageUrl: "https://images.unsplash.com/photo-1536152477996-8a5dfe05f0ef?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
+        date: "2025-07-10"
+      },
+      {
+        id: 3,
+        title: "Sun City Resort Luxury",
+        category: "safari",
+        description: "Luxury experience at Sun City Resort",
+        imageUrl: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
+        date: "2025-07-03"
+      },
+      {
+        id: 4,
+        title: "Port Elizabeth Beaches",
+        category: "beach",
+        description: "Beautiful beaches of Port Elizabeth",
+        imageUrl: "https://images.unsplash.com/photo-1544551763-46a013bb70d5?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
+        date: "2025-04-24"
+      },
+      {
+        id: 5,
+        title: "Blyde River Canyon",
+        category: "mpumalanga",
+        description: "Spectacular views of Blyde River Canyon",
+        imageUrl: "https://images.unsplash.com/photo-1589552950456-75eeaf5c6f65?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
+        date: "2025-07-11"
+      },
+      {
+        id: 6,
+        title: "Cape Town Waterfront",
+        category: "cape-town",
+        description: "Vibrant V&A Waterfront in Cape Town",
+        imageUrl: "https://images.unsplash.com/photo-1592400420056-9069f6d6c539?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
+        date: "2025-10-16"
       }
-    });
+    ];
     
-    // Owner photo upload functionality
-    const ownerPhotoUploadForm = document.getElementById('ownerPhotoUploadForm');
-    const ownerPhotoFileInput = document.getElementById('ownerPhotoFile');
-    const ownerFileUploadArea = document.getElementById('ownerFileUploadArea');
-    const ownerUploadPreview = document.getElementById('ownerUploadPreview');
-    const galleryGrid = document.getElementById('galleryGrid');
-    const noPhotos = document.getElementById('noPhotos');
-    const ownerUploadButtonText = document.getElementById('ownerUploadButtonText');
-    const ownerUploadSpinner = document.getElementById('ownerUploadSpinner');
-    
-    // Load existing photos from localStorage
-    let ownerPhotos = JSON.parse(localStorage.getItem('globeTrekOwnerPhotos')) || [];
-    let travelerReviewPhotos = JSON.parse(localStorage.getItem('globeTrekTravelerReviewPhotos')) || [];
-    
-    // Display owner photos in gallery
-    function displayOwnerPhotos() {
+    // Display gallery photos
+    function displayGalleryPhotos() {
+      const galleryGrid = document.getElementById('galleryGrid');
+      const noPhotos = document.getElementById('noPhotos');
+      
       galleryGrid.innerHTML = '';
       
-      if (ownerPhotos.length === 0) {
+      if (galleryPhotos.length === 0) {
         noPhotos.style.display = 'block';
         galleryGrid.appendChild(noPhotos);
         return;
@@ -2316,210 +2074,29 @@
       
       noPhotos.style.display = 'none';
       
-      // Sort photos by date (newest first)
-      ownerPhotos.sort((a, b) => new Date(b.date) - new Date(a.date));
-      
-      // Display all owner photos
-      ownerPhotos.forEach((photo, index) => {
+      // Display all gallery photos
+      galleryPhotos.forEach((photo, index) => {
         const galleryItem = document.createElement('div');
         galleryItem.className = 'gallery-item';
         galleryItem.setAttribute('data-category', photo.category);
         galleryItem.setAttribute('data-index', index);
-        galleryItem.setAttribute('data-type', 'owner');
         
         galleryItem.innerHTML = `
-          <img src="${photo.dataUrl}" alt="${photo.title}" loading="lazy">
-          <button class="delete-photo-btn" data-index="${index}" data-type="owner">
-            <i class="fas fa-times"></i>
-          </button>
+          <img src="${photo.imageUrl}" alt="${photo.title}" loading="lazy">
           <div class="gallery-overlay">
             <h4>${photo.title}</h4>
-            <p>${photo.description || 'GlobeTrek Adventure'}</p>
-            <p style="font-size: 0.8rem; margin-top: 5px;"><i class="fas fa-user-shield"></i> Posted by GlobeTrek</p>
+            <p>${photo.description}</p>
           </div>
         `;
         
         galleryGrid.appendChild(galleryItem);
         
         // Add click event for lightbox
-        galleryItem.addEventListener('click', function(e) {
-          if (!e.target.closest('.delete-photo-btn')) {
-            openLightbox(index, 'owner');
-          }
-        });
-        
-        // Add delete button event
-        const deleteBtn = galleryItem.querySelector('.delete-photo-btn');
-        deleteBtn.addEventListener('click', function(e) {
-          e.stopPropagation();
-          deleteOwnerPhoto(index);
+        galleryItem.addEventListener('click', function() {
+          openLightbox(index);
         });
       });
-      
-      // Also display traveler review photos that are marked as public
-      travelerReviewPhotos.forEach((photo, index) => {
-        if (photo.isPublic) {
-          const galleryItem = document.createElement('div');
-          galleryItem.className = 'gallery-item';
-          galleryItem.setAttribute('data-category', photo.category || 'other');
-          galleryItem.setAttribute('data-index', index);
-          galleryItem.setAttribute('data-type', 'traveler');
-          
-          galleryItem.innerHTML = `
-            <img src="${photo.dataUrl}" alt="${photo.title || 'Traveler photo'}" loading="lazy">
-            <div class="gallery-overlay">
-              <h4>${photo.title || 'Traveler Photo'}</h4>
-              <p>${photo.description || 'Shared by a traveler'}</p>
-              <p style="font-size: 0.8rem; margin-top: 5px;"><i class="fas fa-user"></i> Posted by traveler</p>
-            </div>
-          `;
-          
-          galleryGrid.appendChild(galleryItem);
-          
-          // Add click event for lightbox
-          galleryItem.addEventListener('click', function(e) {
-            openLightbox(index, 'traveler');
-          });
-        }
-      });
     }
-    
-    // Delete owner photo function
-    function deleteOwnerPhoto(index) {
-      if (confirm('Are you sure you want to delete this photo from the gallery?')) {
-        ownerPhotos.splice(index, 1);
-        localStorage.setItem('globeTrekOwnerPhotos', JSON.stringify(ownerPhotos));
-        displayOwnerPhotos();
-        alert('Photo deleted successfully from the gallery!');
-      }
-    }
-    
-    // Owner file upload area click
-    ownerFileUploadArea.addEventListener('click', () => {
-      ownerPhotoFileInput.click();
-    });
-    
-    // Drag and drop functionality for owner upload
-    ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
-      ownerFileUploadArea.addEventListener(eventName, preventDefaults, false);
-    });
-    
-    function preventDefaults(e) {
-      e.preventDefault();
-      e.stopPropagation();
-    }
-    
-    ['dragenter', 'dragover'].forEach(eventName => {
-      ownerFileUploadArea.addEventListener(eventName, highlight, false);
-    });
-    
-    ['dragleave', 'drop'].forEach(eventName => {
-      ownerFileUploadArea.addEventListener(eventName, unhighlight, false);
-    });
-    
-    function highlight() {
-      ownerFileUploadArea.classList.add('dragover');
-    }
-    
-    function unhighlight() {
-      ownerFileUploadArea.classList.remove('dragover');
-    }
-    
-    // Handle file drop for owner
-    ownerFileUploadArea.addEventListener('drop', handleOwnerDrop, false);
-    
-    function handleOwnerDrop(e) {
-      const dt = e.dataTransfer;
-      const files = dt.files;
-      handleOwnerFiles(files);
-    }
-    
-    // Handle file selection for owner
-    ownerPhotoFileInput.addEventListener('change', function() {
-      handleOwnerFiles(this.files);
-    });
-    
-    function handleOwnerFiles(files) {
-      if (files.length > 0) {
-        const file = files[0];
-        
-        // Check file size (max 5MB)
-        if (file.size > 5 * 1024 * 1024) {
-          alert('File size must be less than 5MB');
-          return;
-        }
-        
-        // Check file type
-        if (!file.type.match('image.*')) {
-          alert('Please select an image file (JPEG, PNG, JPG)');
-          return;
-        }
-        
-        // Preview image
-        const reader = new FileReader();
-        reader.onload = function(e) {
-          ownerUploadPreview.innerHTML = `
-            <img src="${e.target.result}" alt="Preview">
-            <div class="file-info">${file.name} (${Math.round(file.size / 1024)} KB)</div>
-          `;
-        };
-        reader.readAsDataURL(file);
-      }
-    }
-    
-    // Owner photo upload form submission
-    ownerPhotoUploadForm.addEventListener('submit', function(e) {
-      e.preventDefault();
-      
-      const title = document.getElementById('ownerPhotoTitle').value.trim();
-      const category = document.getElementById('ownerPhotoDestination').value;
-      const description = document.getElementById('ownerPhotoDescription').value.trim();
-      const file = ownerPhotoFileInput.files[0];
-      
-      if (!title || !category || !file) {
-        alert('Please fill in all required fields and select a photo.');
-        return;
-      }
-      
-      // Show loading state
-      ownerUploadButtonText.textContent = 'Uploading...';
-      ownerUploadSpinner.style.display = 'inline-block';
-      
-      // Convert image to base64
-      const reader = new FileReader();
-      reader.onload = function(e) {
-        const newPhoto = {
-          id: Date.now(),
-          title: title,
-          category: category,
-          description: description,
-          dataUrl: e.target.result,
-          date: new Date().toISOString(),
-          uploadedBy: 'owner'
-        };
-        
-        // Add to owner photos array
-        ownerPhotos.unshift(newPhoto);
-        
-        // Save to localStorage
-        localStorage.setItem('globeTrekOwnerPhotos', JSON.stringify(ownerPhotos));
-        
-        // Display updated photos
-        displayOwnerPhotos();
-        
-        // Show success message
-        alert(`Photo "${title}" uploaded successfully to the gallery!`);
-        
-        // Reset form
-        ownerPhotoUploadForm.reset();
-        ownerUploadPreview.innerHTML = '';
-        
-        // Reset button state
-        ownerUploadButtonText.textContent = 'Upload to Gallery';
-        ownerUploadSpinner.style.display = 'none';
-      };
-      reader.readAsDataURL(file);
-    });
     
     // ==================== REVIEW SYSTEM WITH PHOTO UPLOAD ====================
     
@@ -2596,6 +2173,8 @@
     const reviewPhotoGrid = document.getElementById('reviewPhotoGrid');
     const reviewPhotoFileInput = document.getElementById('reviewPhotoFile');
     const photoCountElement = document.getElementById('photoCount');
+    const reviewButtonText = document.getElementById('reviewButtonText');
+    const reviewSpinner = document.getElementById('reviewSpinner');
     let reviewPhotos = []; // Array to hold base64 strings of uploaded photos
     
     // Handle adding photos for review
@@ -2820,27 +2399,9 @@
         text: text,
         photos: reviewPhotos.map(photo => ({
           dataUrl: photo.dataUrl,
-          name: photo.name,
-          isPublic: true // All review photos are public by default
+          name: photo.name
         }))
       };
-      
-      // Save traveler review photos separately for potential gallery display
-      if (reviewPhotos.length > 0) {
-        const travelerPhotos = JSON.parse(localStorage.getItem('globeTrekTravelerReviewPhotos')) || [];
-        reviewPhotos.forEach(photo => {
-          travelerPhotos.push({
-            dataUrl: photo.dataUrl,
-            title: `Photo from ${name}'s review`,
-            description: `From ${destination} trip`,
-            category: getCategoryFromDestination(destination),
-            date: new Date().toISOString(),
-            uploadedBy: 'traveler',
-            isPublic: true
-          });
-        });
-        localStorage.setItem('globeTrekTravelerReviewPhotos', JSON.stringify(travelerPhotos));
-      }
       
       // Add to reviews array
       reviews.push(newReview);
@@ -2851,11 +2412,8 @@
       // Display updated reviews
       displayReviews();
       
-      // Refresh gallery to show traveler photos if marked public
-      displayOwnerPhotos();
-      
       // Show success message
-      alert(`Thank you, ${name}! Your review has been submitted successfully.${reviewPhotos.length > 0 ? ' Your photos have been added to the gallery.' : ''}`);
+      alert(`Thank you, ${name}! Your review has been submitted successfully.${reviewPhotos.length > 0 ? ' Your photos have been added to your review.' : ''}`);
       
       // Reset form
       this.reset();
@@ -2878,15 +2436,6 @@
       document.getElementById('reviews').scrollIntoView({ behavior: 'smooth' });
     });
     
-    // Helper function to get category from destination
-    function getCategoryFromDestination(destination) {
-      if (destination.includes('Cape Town')) return 'cape-town';
-      if (destination.includes('Mpumalanga')) return 'mpumalanga';
-      if (destination.includes('Beach')) return 'beach';
-      if (destination.includes('Sun City') || destination.includes('Bela Bela')) return 'safari';
-      return 'other';
-    }
-    
     // ==================== LIGHTBOX FUNCTIONALITY ====================
     
     const lightboxModal = document.getElementById('lightboxModal');
@@ -2897,11 +2446,10 @@
     const lightboxNext = document.getElementById('lightboxNext');
     
     let currentImageIndex = 0;
-    let currentImageType = 'owner'; // 'owner' or 'traveler' or 'review'
     let filteredGalleryItems = [];
     
     // Open lightbox for gallery
-    function openLightbox(index, type) {
+    function openLightbox(index) {
       // Get all currently visible gallery items (after filtering)
       const activeFilter = document.querySelector('.gallery-filter-btn.active').getAttribute('data-filter');
       
@@ -2914,7 +2462,6 @@
       }
       
       currentImageIndex = index;
-      currentImageType = type;
       updateLightbox();
       lightboxModal.classList.add('active');
       document.body.style.overflow = 'hidden';
@@ -2931,27 +2478,19 @@
       
       lightboxModal.classList.add('active');
       document.body.style.overflow = 'hidden';
-      
-      // Set up navigation for review photos
-      filteredGalleryItems = [{type: 'review', reviewIndex, photoIndex}];
-      currentImageIndex = 0;
-      currentImageType = 'review';
     }
     
     // Update lightbox content
     function updateLightbox() {
       if (filteredGalleryItems.length > 0 && currentImageIndex >= 0 && currentImageIndex < filteredGalleryItems.length) {
         const currentItem = filteredGalleryItems[currentImageIndex];
+        const img = currentItem.querySelector('img');
+        const title = currentItem.querySelector('h4').textContent;
+        const description = currentItem.querySelector('p').textContent;
         
-        if (currentImageType === 'owner' || currentImageType === 'traveler') {
-          const img = currentItem.querySelector('img');
-          const title = currentItem.querySelector('h4').textContent;
-          const description = currentItem.querySelector('p').textContent;
-          
-          lightboxImage.src = img.src;
-          lightboxImage.alt = img.alt;
-          lightboxCaption.textContent = `${title} - ${description}`;
-        }
+        lightboxImage.src = img.src;
+        lightboxImage.alt = img.alt;
+        lightboxCaption.textContent = `${title} - ${description}`;
       }
     }
     
@@ -2998,46 +2537,8 @@
       updateLightbox();
     }
     
-    // Display photos on page load
-    displayOwnerPhotos();
-    
-    // Add some sample owner photos if none exist
-    if (ownerPhotos.length === 0) {
-      const sampleOwnerPhotos = [
-        {
-          id: 1,
-          title: "Table Mountain Adventure",
-          category: "cape-town",
-          description: "Breathtaking view from the top of Table Mountain",
-          dataUrl: "https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
-          date: new Date().toISOString(),
-          uploadedBy: 'owner'
-        },
-        {
-          id: 2,
-          title: "Mpumalanga Panorama View",
-          category: "mpumalanga",
-          description: "God's Window viewpoint in Mpumalanga",
-          dataUrl: "https://images.unsplash.com/photo-1536152477996-8a5dfe05f0ef?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
-          date: new Date().toISOString(),
-          uploadedBy: 'owner'
-        },
-        {
-          id: 3,
-          title: "Sun City Resort",
-          category: "safari",
-          description: "Luxury experience at Sun City",
-          dataUrl: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
-          date: new Date().toISOString(),
-          uploadedBy: 'owner'
-        }
-      ];
-      
-      // Add sample owner photos
-      ownerPhotos = sampleOwnerPhotos;
-      localStorage.setItem('globeTrekOwnerPhotos', JSON.stringify(ownerPhotos));
-      displayOwnerPhotos();
-    }
+    // Display gallery photos on page load
+    displayGalleryPhotos();
     
     // Add some sample reviews if none exist
     if (reviews.length === 0) {
