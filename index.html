@@ -146,25 +146,68 @@
       cursor: pointer;
     }
     
-    /* Header with Beautiful Background */
+    /* Header with Beautiful Background - UPDATED */
     header {
-      background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), 
-                  url('https://images.unsplash.com/photo-1519677100204-4d504f4b1d7c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
+      background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.5)), 
+                  url('https://images.unsplash.com/photo-1469474968028-56623f02e42e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2074&q=80');
       background-size: cover;
       background-position: center;
       background-attachment: fixed;
       color: white;
-      padding: 120px 20px;
+      padding: 140px 20px;
       text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    /* Add a subtle animation to the header */
+    header::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(45deg, rgba(255, 122, 24, 0.1), rgba(26, 95, 180, 0.1));
+      z-index: 0;
+      animation: gradientShift 15s ease infinite;
+    }
+    
+    @keyframes gradientShift {
+      0%, 100% { opacity: 0.3; }
+      50% { opacity: 0.5; }
+    }
+    
+    .container {
+      position: relative;
+      z-index: 1;
+    }
+    
+    header h1 {
+      text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
+      animation: fadeInUp 1s ease-out;
     }
     
     header p {
       font-size: 1.3rem;
       margin-bottom: 2rem;
-      color: rgba(255,255,255,0.9);
+      color: rgba(255,255,255,0.95);
       max-width: 700px;
       margin-left: auto;
       margin-right: auto;
+      text-shadow: 1px 1px 4px rgba(0,0,0,0.5);
+      animation: fadeInUp 1s ease-out 0.2s both;
+    }
+    
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
     
     /* Buttons */
@@ -579,6 +622,12 @@
       flex: 1;
       min-width: 250px;
       text-align: center;
+      transition: var(--transition);
+    }
+    
+    .contact-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 30px rgba(0,0,0,0.15);
     }
     
     .contact-card i {
@@ -594,6 +643,15 @@
     
     .whatsapp-btn:hover {
       background-color: #128C7E;
+    }
+    
+    .email-btn {
+      background-color: var(--primary);
+      margin-top: 15px;
+    }
+    
+    .email-btn:hover {
+      background-color: var(--primary-dark);
     }
     
     /* Footer */
@@ -758,7 +816,7 @@
       }
       
       header {
-        padding: 100px 20px;
+        padding: 120px 20px;
         background-attachment: scroll;
       }
       
@@ -1208,8 +1266,7 @@
           <a class="btn" href="#contact">Join Our Next Adventure</a>
         </div>
         <div class="about-image">
-          <!-- Fixed image URL - South African landscape -->
-          <img src="https://images.unsplash.com/photo-1578667479818-7e3c893e3d46?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="South African landscape - Table Mountain">
+          <img src="https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Beautiful South African landscape with mountains and valleys">
         </div>
       </div>
     </div>
@@ -1222,6 +1279,14 @@
         <p>Ready to join one of our amazing 2026 trips? Contact us to secure your spot or enquire about custom travel packages.</p>
         
         <div class="contact-options">
+          <div class="contact-card">
+            <i class="fas fa-envelope"></i>
+            <h3>Email Us</h3>
+            <p>Send us an email for detailed information, custom packages, or any questions you may have.</p>
+            <p style="font-size: 1.1rem; font-weight: 600; color: var(--dark); margin-top: 10px; word-break: break-all;">lefumlangeni@icloud.com</p>
+            <a class="btn email-btn" href="mailto:lefumlangeni@icloud.com">Send Email</a>
+          </div>
+          
           <div class="contact-card">
             <i class="fab fa-whatsapp"></i>
             <h3>Quick Booking</h3>
@@ -1259,6 +1324,7 @@
           </div>
           <p>Creating unforgettable travel experiences across South Africa. Join us for our exciting 2026 trip calendar!</p>
           <p><strong>Contact:</strong> Mr Lefu Mlangeni | +27 72 558 1629</p>
+          <p><strong>Email:</strong> lefumlangeni@icloud.com</p>
           <div class="social-icons">
             <!-- Fixed TikTok Link -->
             <a href="https://www.tiktok.com/@globetrek.adventu6?_r=1&_t=ZS-93cFojYNXBH" target="_blank" class="tiktok-icon">
