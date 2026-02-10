@@ -1,2576 +1,483 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>GlobeTrek Adventures | Custom Travel Packages</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <style>
-    :root {
-      --primary: #ff7a18;
-      --primary-dark: #e56a0f;
-      --secondary: #1a5fb4;
-      --dark: #222;
-      --light: #f9f9f9;
-      --gray: #777;
-      --shadow: 0 5px 15px rgba(0,0,0,0.1);
-      --transition: all 0.3s ease;
-    }
-    
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-    
-    body {
-      font-family: 'Poppins', sans-serif;
-      color: #333;
-      background-color: var(--light);
-      line-height: 1.6;
-    }
-    
-    h1, h2, h3 {
-      font-family: 'Playfair Display', serif;
-      font-weight: 700;
-      line-height: 1.2;
-    }
-    
-    h1 {
-      font-size: 3.5rem;
-      margin-bottom: 1rem;
-    }
-    
-    h2 {
-      font-size: 2.5rem;
-      margin-bottom: 1.5rem;
-      color: var(--dark);
-      text-align: center;
-      position: relative;
-    }
-    
-    h2:after {
-      content: '';
-      position: absolute;
-      width: 80px;
-      height: 4px;
-      background: var(--primary);
-      bottom: -10px;
-      left: 50%;
-      transform: translateX(-50%);
-      border-radius: 2px;
-    }
-    
-    h3 {
-      font-size: 1.5rem;
-      margin-bottom: 0.8rem;
-      color: var(--secondary);
-    }
-    
-    p {
-      margin-bottom: 1.2rem;
-      color: var(--gray);
-    }
-    
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 20px;
-    }
-    
-    /* Navigation */
-    nav {
-      background-color: white;
-      padding: 15px 5%;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      box-shadow: var(--shadow);
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-    }
-    
-    .logo {
-      font-size: 1.8rem;
-      font-weight: 700;
-      color: var(--secondary);
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-    
-    .logo i {
-      color: var(--primary);
-    }
-    
-    .nav-links {
-      display: flex;
-      gap: 25px;
-    }
-    
-    .nav-links a {
-      text-decoration: none;
-      color: var(--dark);
-      font-weight: 500;
-      transition: var(--transition);
-      position: relative;
-    }
-    
-    .nav-links a:hover {
-      color: var(--primary);
-    }
-    
-    .nav-links a:after {
-      content: '';
-      position: absolute;
-      width: 0;
-      height: 2px;
-      background: var(--primary);
-      bottom: -5px;
-      left: 0;
-      transition: var(--transition);
-    }
-    
-    .nav-links a:hover:after {
-      width: 100%;
-    }
-    
-    .mobile-menu-btn {
-      display: none;
-      font-size: 1.5rem;
-      background: none;
-      border: none;
-      color: var(--dark);
-      cursor: pointer;
-    }
-    
-    /* Header with Beautiful Background */
-    header {
-      background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.5)), 
-                  url('https://images.unsplash.com/photo-1469474968028-56623f02e42e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2074&q=80');
-      background-size: cover;
-      background-position: center;
-      background-attachment: fixed;
-      color: white;
-      padding: 140px 20px;
-      text-align: center;
-      position: relative;
-      overflow: hidden;
-    }
-    
-    header::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: linear-gradient(45deg, rgba(255, 122, 24, 0.1), rgba(26, 95, 180, 0.1));
-      z-index: 0;
-      animation: gradientShift 15s ease infinite;
-    }
-    
-    @keyframes gradientShift {
-      0%, 100% { opacity: 0.3; }
-      50% { opacity: 0.5; }
-    }
-    
-    .container {
-      position: relative;
-      z-index: 1;
-    }
-    
-    header h1 {
-      text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
-      animation: fadeInUp 1s ease-out;
-    }
-    
-    header p {
-      font-size: 1.3rem;
-      margin-bottom: 2rem;
-      color: rgba(255,255,255,0.95);
-      max-width: 700px;
-      margin-left: auto;
-      margin-right: auto;
-      text-shadow: 1px 1px 4px rgba(0,0,0,0.5);
-      animation: fadeInUp 1s ease-out 0.2s both;
-    }
-    
-    @keyframes fadeInUp {
-      from {
-        opacity: 0;
-        transform: translateY(20px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-    
-    /* Buttons */
-    .btn {
-      background-color: var(--primary);
-      color: white;
-      padding: 14px 32px;
-      text-decoration: none;
-      border-radius: 30px;
-      font-weight: 600;
-      display: inline-block;
-      transition: var(--transition);
-      border: none;
-      cursor: pointer;
-      font-size: 1rem;
-    }
-    
-    .btn:hover {
-      background-color: var(--primary-dark);
-      transform: translateY(-3px);
-      box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-    }
-    
-    .btn-secondary {
-      background-color: var(--secondary);
-    }
-    
-    .btn-secondary:hover {
-      background-color: #15539e;
-    }
-    
-    .btn-book {
-      background-color: #28a745;
-    }
-    
-    .btn-book:hover {
-      background-color: #218838;
-    }
-    
-    /* Sections */
-    section {
-      padding: 80px 0;
-    }
-    
-    .section-title {
-      margin-bottom: 3rem;
-    }
-    
-    /* Upcoming Trips Section */
-    .upcoming-trips {
-      background-color: #f0f7ff;
-    }
-    
-    .trips-container {
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-    
-    .trip-filter {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-bottom: 40px;
-    }
-    
-    .filter-btn {
-      background: white;
-      border: 2px solid var(--secondary);
-      color: var(--secondary);
-      padding: 8px 20px;
-      border-radius: 25px;
-      cursor: pointer;
-      font-weight: 500;
-      transition: var(--transition);
-    }
-    
-    .filter-btn.active,
-    .filter-btn:hover {
-      background: var(--secondary);
-      color: white;
-    }
-    
-    .trips-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-      gap: 30px;
-    }
-    
-    .trip-card {
-      background: white;
-      border-radius: 15px;
-      overflow: hidden;
-      box-shadow: var(--shadow);
-      transition: var(--transition);
-    }
-    
-    .trip-card:hover {
-      transform: translateY(-10px);
-      box-shadow: 0 15px 30px rgba(0,0,0,0.15);
-    }
-    
-    .trip-header {
-      padding: 20px;
-      background: linear-gradient(135deg, var(--secondary), #0d47a1);
-      color: white;
-      text-align: center;
-    }
-    
-    .trip-header h3 {
-      color: white;
-      margin-bottom: 5px;
-    }
-    
-    .trip-date {
-      font-size: 1.1rem;
-      opacity: 0.9;
-    }
-    
-    .trip-body {
-      padding: 25px;
-    }
-    
-    .trip-details {
-      display: flex;
-      justify-content: space-between;
-      margin-bottom: 20px;
-    }
-    
-    .trip-detail {
-      text-align: center;
-    }
-    
-    .trip-detail i {
-      font-size: 1.5rem;
-      color: var(--primary);
-      margin-bottom: 8px;
-    }
-    
-    .trip-price {
-      text-align: center;
-      padding: 15px;
-      background-color: rgba(255, 122, 24, 0.1);
-      border-radius: 10px;
-      margin: 20px 0;
-    }
-    
-    .price-amount {
-      font-size: 2rem;
-      font-weight: 700;
-      color: var(--primary);
-    }
-    
-    .price-note {
-      font-size: 0.9rem;
-      color: var(--gray);
-      margin-top: 5px;
-    }
-    
-    .trip-features {
-      list-style: none;
-      margin: 20px 0;
-    }
-    
-    .trip-features li {
-      margin-bottom: 10px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-    
-    .trip-features li i {
-      color: var(--primary);
-    }
-    
-    .trip-actions {
-      display: flex;
-      gap: 10px;
-      margin-top: 20px;
-    }
-    
-    .trip-actions .btn {
-      flex: 1;
-      text-align: center;
-      padding: 12px 0;
-    }
-    
-    /* Cape Town Special Card */
-    .trip-card.special {
-      border: 3px solid var(--primary);
-      position: relative;
-    }
-    
-    .special-badge {
-      position: absolute;
-      top: -10px;
-      right: 20px;
-      background: var(--primary);
-      color: white;
-      padding: 5px 15px;
-      border-radius: 15px;
-      font-weight: 600;
-      font-size: 0.9rem;
-    }
-    
-    /* Gallery Section */
-    .gallery-section {
-      background-color: #f8f9fa;
-    }
-    
-    .gallery-container {
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-    
-    .gallery-filter {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-bottom: 40px;
-    }
-    
-    .gallery-filter-btn {
-      background: white;
-      border: 2px solid var(--secondary);
-      color: var(--secondary);
-      padding: 8px 20px;
-      border-radius: 25px;
-      cursor: pointer;
-      font-weight: 500;
-      transition: var(--transition);
-    }
-    
-    .gallery-filter-btn.active,
-    .gallery-filter-btn:hover {
-      background: var(--secondary);
-      color: white;
-    }
-    
-    .gallery-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-      gap: 20px;
-      margin-bottom: 40px;
-    }
-    
-    .gallery-item {
-      position: relative;
-      border-radius: 15px;
-      overflow: hidden;
-      box-shadow: var(--shadow);
-      transition: var(--transition);
-      height: 250px;
-      cursor: pointer;
-    }
-    
-    .gallery-item:hover {
-      transform: translateY(-5px) scale(1.02);
-      box-shadow: 0 15px 30px rgba(0,0,0,0.2);
-    }
-    
-    .gallery-item img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-      transition: var(--transition);
-    }
-    
-    .gallery-item:hover img {
-      transform: scale(1.1);
-    }
-    
-    .gallery-overlay {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      background: linear-gradient(transparent, rgba(0,0,0,0.8));
-      color: white;
-      padding: 20px;
-      transform: translateY(100%);
-      transition: var(--transition);
-    }
-    
-    .gallery-item:hover .gallery-overlay {
-      transform: translateY(0);
-    }
-    
-    .gallery-overlay h4 {
-      margin-bottom: 5px;
-      font-size: 1.2rem;
-    }
-    
-    .gallery-overlay p {
-      color: rgba(255,255,255,0.8);
-      font-size: 0.9rem;
-      margin-bottom: 0;
-    }
-    
-    /* Review Photo Upload */
-    .review-photo-upload {
-      background: #f8f9fa;
-      border: 2px dashed #ddd;
-      border-radius: 10px;
-      padding: 25px;
-      margin-top: 20px;
-    }
-    
-    .review-photo-upload h4 {
-      margin-bottom: 15px;
-      color: var(--dark);
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-    
-    .review-photo-upload h4 i {
-      color: var(--secondary);
-    }
-    
-    .review-photo-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-      gap: 15px;
-      margin-bottom: 15px;
-    }
-    
-    .review-photo-item {
-      position: relative;
-      height: 120px;
-      border-radius: 8px;
-      overflow: hidden;
-      background: #eee;
-    }
-    
-    .review-photo-item img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-    
-    .review-photo-item.empty {
-      border: 2px dashed #ccc;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      color: var(--gray);
-      cursor: pointer;
-      transition: var(--transition);
-    }
-    
-    .review-photo-item.empty:hover {
-      border-color: var(--primary);
-      background: rgba(255, 122, 24, 0.05);
-    }
-    
-    .review-photo-item.empty i {
-      font-size: 2rem;
-      margin-bottom: 8px;
-      color: var(--secondary);
-    }
-    
-    .remove-review-photo {
-      position: absolute;
-      top: 5px;
-      right: 5px;
-      background: rgba(255, 0, 0, 0.8);
-      color: white;
-      border: none;
-      width: 25px;
-      height: 25px;
-      border-radius: 50%;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 12px;
-      opacity: 0;
-      transition: var(--transition);
-    }
-    
-    .review-photo-item:hover .remove-review-photo {
-      opacity: 1;
-    }
-    
-    .review-file-input {
-      display: none;
-    }
-    
-    .review-file-upload {
-      text-align: center;
-      padding: 15px;
-      border: 2px dashed #ddd;
-      border-radius: 8px;
-      cursor: pointer;
-      transition: var(--transition);
-      margin-top: 10px;
-    }
-    
-    .review-file-upload:hover {
-      border-color: var(--primary);
-      background: rgba(255, 122, 24, 0.05);
-    }
-    
-    .review-file-upload i {
-      font-size: 2rem;
-      color: var(--secondary);
-      margin-bottom: 10px;
-    }
-    
-    .photo-counter {
-      font-size: 0.9rem;
-      color: var(--gray);
-      text-align: center;
-      margin-top: 10px;
-    }
-    
-    .photo-counter span {
-      font-weight: 600;
-      color: var(--primary);
-    }
-    
-    /* Date Picker for Review */
-    .date-picker-row {
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
-      gap: 15px;
-    }
-    
-    .date-picker-group {
-      margin-bottom: 0;
-    }
-    
-    /* Lightbox Modal */
-    .lightbox-modal {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0,0,0,0.9);
-      z-index: 2000;
-      justify-content: center;
-      align-items: center;
-      padding: 20px;
-    }
-    
-    .lightbox-modal.active {
-      display: flex;
-      animation: fadeIn 0.3s ease;
-    }
-    
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-    
-    .lightbox-content {
-      max-width: 90%;
-      max-height: 90%;
-      position: relative;
-    }
-    
-    .lightbox-content img {
-      width: 100%;
-      height: auto;
-      max-height: 80vh;
-      object-fit: contain;
-      border-radius: 10px;
-    }
-    
-    .lightbox-caption {
-      position: absolute;
-      bottom: -50px;
-      left: 0;
-      right: 0;
-      text-align: center;
-      color: white;
-      padding: 10px;
-    }
-    
-    .lightbox-close {
-      position: absolute;
-      top: -40px;
-      right: 0;
-      background: none;
-      border: none;
-      color: white;
-      font-size: 2rem;
-      cursor: pointer;
-      transition: var(--transition);
-    }
-    
-    .lightbox-close:hover {
-      color: var(--primary);
-    }
-    
-    .lightbox-nav {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      background: rgba(255,255,255,0.2);
-      border: none;
-      color: white;
-      font-size: 2rem;
-      width: 50px;
-      height: 50px;
-      border-radius: 50%;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: var(--transition);
-    }
-    
-    .lightbox-nav:hover {
-      background: var(--primary);
-    }
-    
-    .lightbox-prev {
-      left: -70px;
-    }
-    
-    .lightbox-next {
-      right: -70px;
-    }
-    
-    /* Review System */
-    .reviews-section {
-      background: linear-gradient(rgba(255,255,255,0.9), rgba(255,255,255,0.9)), 
-                  url('https://images.unsplash.com/photo-1516483638261-f4dbaf036963?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80');
-      background-size: cover;
-      background-position: center;
-      background-attachment: fixed;
-    }
-    
-    .review-container {
-      max-width: 1000px;
-      margin: 0 auto;
-    }
-    
-    .review-form-container {
-      background: white;
-      padding: 40px;
-      border-radius: 15px;
-      box-shadow: var(--shadow);
-      margin-bottom: 50px;
-    }
-    
-    .review-form h3 {
-      text-align: center;
-      color: var(--dark);
-      margin-bottom: 25px;
-    }
-    
-    .form-row {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 20px;
-      margin-bottom: 20px;
-    }
-    
-    .form-group {
-      margin-bottom: 20px;
-    }
-    
-    .form-group.full-width {
-      grid-column: 1 / -1;
-    }
-    
-    .form-group label {
-      display: block;
-      margin-bottom: 8px;
-      font-weight: 500;
-      color: var(--dark);
-    }
-    
-    .form-group input,
-    .form-group textarea,
-    .form-group select {
-      width: 100%;
-      padding: 12px 15px;
-      border: 1px solid #ddd;
-      border-radius: 8px;
-      font-family: 'Poppins', sans-serif;
-      font-size: 1rem;
-      transition: var(--transition);
-    }
-    
-    .form-group input:focus,
-    .form-group textarea:focus,
-    .form-group select:focus {
-      outline: none;
-      border-color: var(--primary);
-      box-shadow: 0 0 0 3px rgba(255, 122, 24, 0.1);
-    }
-    
-    .form-group textarea {
-      min-height: 120px;
-      resize: vertical;
-    }
-    
-    .rating-stars {
-      display: flex;
-      gap: 5px;
-      margin-top: 5px;
-    }
-    
-    .rating-stars i {
-      font-size: 1.5rem;
-      color: #ddd;
-      cursor: pointer;
-      transition: var(--transition);
-    }
-    
-    .rating-stars i:hover,
-    .rating-stars i.active {
-      color: #ffc107;
-    }
-    
-    .reviews-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-      gap: 25px;
-      margin-top: 40px;
-    }
-    
-    .review-card {
-      background: white;
-      padding: 25px;
-      border-radius: 15px;
-      box-shadow: var(--shadow);
-      transition: var(--transition);
-    }
-    
-    .review-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 10px 25px rgba(0,0,0,0.15);
-    }
-    
-    .review-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      margin-bottom: 15px;
-    }
-    
-    .reviewer-info h4 {
-      margin-bottom: 5px;
-      color: var(--dark);
-    }
-    
-    .review-date {
-      font-size: 0.85rem;
-      color: var(--gray);
-    }
-    
-    .review-rating {
-      color: #ffc107;
-    }
-    
-    .review-destination {
-      display: inline-block;
-      background: rgba(26, 95, 180, 0.1);
-      color: var(--secondary);
-      padding: 3px 10px;
-      border-radius: 15px;
-      font-size: 0.85rem;
-      margin-top: 5px;
-    }
-    
-    .review-text {
-      font-style: italic;
-      color: var(--gray);
-      line-height: 1.6;
-    }
-    
-    .review-photos {
-      margin-top: 15px;
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 10px;
-    }
-    
-    .review-photo-thumb {
-      height: 80px;
-      border-radius: 8px;
-      overflow: hidden;
-      cursor: pointer;
-    }
-    
-    .review-photo-thumb img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: var(--transition);
-    }
-    
-    .review-photo-thumb:hover img {
-      transform: scale(1.1);
-    }
-    
-    .no-reviews {
-      text-align: center;
-      padding: 40px;
-      background: white;
-      border-radius: 15px;
-      box-shadow: var(--shadow);
-    }
-    
-    .no-photos {
-      text-align: center;
-      padding: 60px 40px;
-      background: white;
-      border-radius: 15px;
-      box-shadow: var(--shadow);
-      grid-column: 1 / -1;
-    }
-    
-    .no-photos i {
-      font-size: 3rem;
-      color: var(--primary);
-      margin-bottom: 20px;
-    }
-    
-    /* About Section */
-    .about-content {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 50px;
-      align-items: center;
-    }
-    
-    .about-image {
-      border-radius: 15px;
-      overflow: hidden;
-      box-shadow: var(--shadow);
-      height: 400px;
-      background: linear-gradient(135deg, var(--secondary), #0d47a1);
-    }
-    
-    .about-image img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-      transition: var(--transition);
-    }
-    
-    .about-image:hover img {
-      transform: scale(1.05);
-    }
-    
-    /* Contact Section */
-    .contact-content {
-      max-width: 800px;
-      margin: 0 auto;
-      text-align: center;
-    }
-    
-    .contact-options {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 20px;
-      margin-top: 40px;
-    }
-    
-    .contact-card {
-      background: white;
-      padding: 25px;
-      border-radius: 15px;
-      box-shadow: var(--shadow);
-      flex: 1;
-      min-width: 250px;
-      text-align: center;
-      transition: var(--transition);
-    }
-    
-    .contact-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 15px 30px rgba(0,0,0,0.15);
-    }
-    
-    .contact-card i {
-      font-size: 2.5rem;
-      color: var(--secondary);
-      margin-bottom: 15px;
-    }
-    
-    .whatsapp-btn {
-      background-color: #25D366;
-      margin-top: 15px;
-    }
-    
-    .whatsapp-btn:hover {
-      background-color: #128C7E;
-    }
-    
-    .email-btn {
-      background-color: var(--primary);
-      margin-top: 15px;
-    }
-    
-    .email-btn:hover {
-      background-color: var(--primary-dark);
-    }
-    
-    /* Footer */
-    footer {
-      background-color: var(--dark);
-      color: white;
-      padding: 60px 0 30px;
-    }
-    
-    .footer-content {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 40px;
-      margin-bottom: 40px;
-    }
-    
-    .footer-column h4 {
-      margin-bottom: 20px;
-      color: white;
-      font-size: 1.3rem;
-    }
-    
-    .footer-links {
-      list-style: none;
-    }
-    
-    .footer-links li {
-      margin-bottom: 10px;
-    }
-    
-    .footer-links a {
-      color: #bbb;
-      text-decoration: none;
-      transition: var(--transition);
-    }
-    
-    .footer-links a:hover {
-      color: var(--primary);
-      padding-left: 5px;
-    }
-    
-    .social-icons {
-      display: flex;
-      gap: 15px;
-      margin-top: 20px;
-    }
-    
-    .social-icons a {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 40px;
-      height: 40px;
-      background-color: rgba(255,255,255,0.1);
-      border-radius: 50%;
-      color: white;
-      text-decoration: none;
-      transition: var(--transition);
-    }
-    
-    .social-icons a:hover {
-      background-color: var(--primary);
-      transform: translateY(-3px);
-    }
-    
-    .tiktok-icon {
-      color: #000000;
-      background-color: #00f2ea;
-    }
-    
-    .tiktok-icon:hover {
-      background-color: #ff0050;
-    }
-    
-    .copyright {
-      text-align: center;
-      padding-top: 30px;
-      border-top: 1px solid rgba(255,255,255,0.1);
-      color: #bbb;
-      font-size: 0.9rem;
-    }
-    
-    /* Floating WhatsApp Button */
-    .floating-whatsapp {
-      position: fixed;
-      bottom: 25px;
-      right: 25px;
-      background: #25D366;
-      color: white;
-      width: 60px;
-      height: 60px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 30px;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.3);
-      text-decoration: none;
-      z-index: 1000;
-      transition: var(--transition);
-    }
-    
-    .floating-whatsapp:hover {
-      background: #128C7E;
-      transform: scale(1.1);
-    }
-    
-    /* Responsive Design */
-    @media (max-width: 992px) {
-      h1 {
-        font-size: 2.8rem;
-      }
-      
-      h2 {
-        font-size: 2.2rem;
-      }
-      
-      .about-content {
-        grid-template-columns: 1fr;
-      }
-      
-      .trips-grid {
-        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-      }
-      
-      .gallery-grid {
-        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-      }
-      
-      .date-picker-row {
-        grid-template-columns: 1fr;
-      }
-      
-      .about-image {
-        height: 300px;
-        order: -1;
-      }
-      
-      .form-row {
-        grid-template-columns: 1fr;
-      }
-      
-      .lightbox-nav {
-        position: fixed;
-        top: auto;
-        bottom: 20px;
-      }
-      
-      .lightbox-prev {
-        left: 20px;
-      }
-      
-      .lightbox-next {
-        right: 20px;
-      }
-    }
-    
-    @media (max-width: 768px) {
-      .mobile-menu-btn {
-        display: block;
-      }
-      
-      .nav-links {
-        position: fixed;
-        top: 70px;
-        left: 0;
-        width: 100%;
-        background: white;
-        flex-direction: column;
-        align-items: center;
-        padding: 20px 0;
-        box-shadow: var(--shadow);
-        transform: translateY(-150%);
-        transition: var(--transition);
-        z-index: 999;
-      }
-      
-      .nav-links.active {
-        transform: translateY(0);
-      }
-      
-      .nav-links a {
-        margin: 10px 0;
-      }
-      
-      header {
-        padding: 120px 20px;
-        background-attachment: scroll;
-      }
-      
-      h1 {
-        font-size: 2.3rem;
-      }
-      
-      header p {
-        font-size: 1.1rem;
-      }
-      
-      .trip-actions {
-        flex-direction: column;
-      }
-      
-      .contact-options {
-        flex-direction: column;
-      }
-      
-      .contact-card {
-        min-width: 100%;
-      }
-      
-      .about-image {
-        height: 250px;
-      }
-      
-      .review-form-container {
-        padding: 25px;
-      }
-      
-      .reviews-grid {
-        grid-template-columns: 1fr;
-      }
-      
-      .gallery-grid {
-        grid-template-columns: 1fr;
-      }
-      
-      .gallery-item {
-        height: 200px;
-      }
-    }
-  </style>
-</head>
-<body>
-
-  <nav>
-    <div class="logo">
-      <i class="fas fa-globe-americas"></i>
-      <span>GlobeTrek Adventures</span>
-    </div>
-    
-    <button class="mobile-menu-btn" id="mobileMenuBtn">
-      <i class="fas fa-bars"></i>
-    </button>
-    
-    <div class="nav-links" id="navLinks">
-      <a href="#home">Home</a>
-      <a href="#trips">Upcoming Trips</a>
-      <a href="#gallery">Gallery</a>
-      <a href="#reviews">Reviews</a>
-      <a href="#about">About Us</a>
-      <a href="#contact">Contact</a>
-    </div>
-  </nav>
-
-  <header id="home">
-    <div class="container">
-      <h1>Upcoming Travel Adventures</h1>
-      <p>Join us on our exciting 2026 travel packages across South Africa. From Mpumalanga's scenic wonders to Cape Town's iconic landmarks, we have the perfect trip for you!</p>
-      <a class="btn" href="#trips">View All Trips</a>
-      <a class="btn btn-secondary" href="#contact" style="margin-left: 15px;">Book Your Spot</a>
-    </div>
-  </header>
-
-  <section class="upcoming-trips" id="trips">
-    <div class="container">
-      <h2 class="section-title">Upcoming Trips 2026</h2>
-      <p style="text-align: center; max-width: 800px; margin: 0 auto 40px;">Book your spot on these amazing upcoming adventures. Limited spaces available!</p>
-      
-      <div class="trip-filter">
-        <button class="filter-btn active" data-filter="all">All Trips</button>
-        <button class="filter-btn" data-filter="mpumalanga">Mpumalanga</button>
-        <button class="filter-btn" data-filter="cape-town">Cape Town</button>
-        <button class="filter-btn" data-filter="coastal">Coastal</button>
-        <button class="filter-btn" data-filter="safari">Safari</button>
-      </div>
-      
-      <div class="trips-grid">
-        <!-- Cape Town Special Package -->
-        <div class="trip-card special" data-category="cape-town">
-          <div class="special-badge">CITY SIGHTSEEING</div>
-          <div class="trip-header">
-            <h3>Cape Town City Tour</h3>
-            <div class="trip-date">15 - 18 October 2026</div>
-          </div>
-          <div class="trip-body">
-            <div class="trip-details">
-              <div class="trip-detail">
-                <i class="fas fa-mountain"></i>
-                <div>Table Mountain</div>
-              </div>
-              <div class="trip-detail">
-                <i class="fas fa-island-tropical"></i>
-                <div>Robben Island</div>
-              </div>
-              <div class="trip-detail">
-                <i class="fas fa-shuttle-van"></i>
-                <div>Shuttle in CPT</div>
-              </div>
-            </div>
-            
-            <div class="trip-price">
-              <div class="price-amount">R 9,900</div>
-              <div class="price-note">Per person</div>
-            </div>
-            
-            <p><strong>Note:</strong> Non-refundable deposit of R2,000 due by 31 August 2026</p>
-            
-            <ul class="trip-features">
-              <li><i class="fas fa-check"></i> Travel to Braamfischer International Airport</li>
-              <li><i class="fas fa-check"></i> Travel from OR Tambo International Airport to Home</li>
-              <li><i class="fas fa-check"></i> Flight Tickets to and from</li>
-              <li><i class="fas fa-check"></i> Table Mountain Aerial Cableway</li>
-              <li><i class="fas fa-check"></i> Robben Island Tour</li>
-              <li><i class="fas fa-check"></i> Sea Point & Camps Bay</li>
-              <li><i class="fas fa-check"></i> City shuttle service included</li>
-              <li><i class="fas fa-check"></i> 3 nights accommodation</li>
-            </ul>
-            
-            <div class="trip-actions">
-              <a class="btn btn-book" href="#contact">Book Now</a>
-              <a class="btn btn-secondary" href="#contact">Enquire</a>
-            </div>
-          </div>
-        </div>
-        
-        <!-- Mpumalanga Trip 1 -->
-        <div class="trip-card" data-category="mpumalanga">
-          <div class="trip-header">
-            <h3>Mpumalanga Panorama</h3>
-            <div class="trip-date">10 - 13 July 2026</div>
-          </div>
-          <div class="trip-body">
-            <div class="trip-details">
-              <div class="trip-detail">
-                <i class="fas fa-water"></i>
-                <div>Waterfalls</div>
-              </div>
-              <div class="trip-detail">
-                <i class="fas fa-mountain"></i>
-                <div>Canyon Views</div>
-              </div>
-              <div class="trip-detail">
-                <i class="fas fa-hiking"></i>
-                <div>Hiking</div>
-              </div>
-            </div>
-            
-            <div class="trip-price">
-              <div class="price-amount">R 6,100</div>
-              <div class="price-note">Per person</div>
-            </div>
-            <p><strong>Note:</strong> Non-refundable deposit of R1,500 due by 31 May 2026</p>
-            <p>Experience the breathtaking beauty of Mpumalanga's Panorama Route with God's Window, Bourke's Luck Potholes, and Blyde River Canyon.</p>
-            
-            <ul class="trip-features">
-              <li><i class="fas fa-check"></i> God's Window viewpoint</li>
-              <li><i class="fas fa-check"></i> Bourke's Luck Potholes</li>
-              <li><i class="fas fa-check"></i> Blyde River Canyon</li>
-              <li><i class="fas fa-check"></i> Waterfall tours</li>
-              <li><i class="fas fa-check"></i> 3 nights accommodation</li>
-            </ul>
-            
-            <div class="trip-actions">
-              <a class="btn btn-book" href="#contact">Book Now</a>
-              <a class="btn btn-secondary" href="#contact">Enquire</a>
-            </div>
-          </div>
-        </div>
-        
-        <!-- Port Elizabeth Trip -->
-        <div class="trip-card" data-category="coastal">
-          <div class="trip-header">
-            <h3>Port Elizabeth Coastal</h3>
-            <div class="trip-date">24 - 27 April 2026</div>
-          </div>
-          <div class="trip-body">
-            <div class="trip-details">
-              <div class="trip-detail">
-                <i class="fas fa-umbrella-beach"></i>
-                <div>Beaches</div>
-              </div>
-              <div class="trip-detail">
-                <i class="fas fa-water"></i>
-                <div>Ocean Views</div>
-              </div>
-              <div class="trip-detail">
-                <i class="fas fa-fish"></i>
-                <div>Seafood</div>
-              </div>
-            </div>
-            
-            <div class="trip-price">
-              <div class="price-amount">R 7,560</div>
-              <div class="price-note">Per person</div>
-            </div>
-            <p><strong>Note:</strong> Non-refundable deposit of R2,000 due by 31 March 2026</p>
-            <p>Discover the friendly city of Port Elizabeth with its beautiful beaches, rich history, and warm hospitality.</p>
-            
-            <ul class="trip-features">
-              <li><i class="fas fa-check"></i> Beachfront accommodation</li>
-              <li><i class="fas fa-check"></i> City tour</li>
-              <li><i class="fas fa-check"></i> Seafood dining experience</li>
-              <li><i class="fas fa-check"></i> Donkin Heritage Trail</li>
-              <li><i class="fas fa-check"></i> 3 nights accommodation</li>
-            </ul>
-            
-            <div class="trip-actions">
-              <a class="btn btn-book" href="#contact">Book Now</a>
-              <a class="btn btn-secondary" href="#contact">Enquire</a>
-            </div>
-          </div>
-        </div>
-        
-        <!-- North West Sun City Trip -->
-        <div class="trip-card" data-category="safari">
-          <div class="trip-header">
-            <h3>North West (Sun City)</h3>
-            <div class="trip-date">3 - 6 July 2026</div>
-          </div>
-          <div class="trip-body">
-            <div class="trip-details">
-              <div class="trip-detail">
-                <i class="fas fa-crown"></i>
-                <div>Luxury</div>
-              </div>
-              <div class="trip-detail">
-                <i class="fas fa-gem"></i>
-                <div>Entertainment</div>
-              </div>
-              <div class="trip-detail">
-                <i class="fas fa-swimming-pool"></i>
-                <div>Resort</div>
-              </div>
-            </div>
-            
-            <div class="trip-price">
-              <div class="price-amount">R 7,000</div>
-              <div class="price-note">Per person</div>
-            </div>
-            <p><strong>Note:</strong> Non-refundable deposit of R2,000 due by 31 May 2026</p>
-            <p>Experience luxury and entertainment at Sun City Resort, with world-class facilities, gaming, and the adjacent Pilanesberg Game Reserve.</p>
-            
-            <ul class="trip-features">
-              <li><i class="fas fa-check"></i> Sun City Resort access</li>
-              <li><i class="fas fa-check"></i> Valley of Waves</li>
-              <li><i class="fas fa-check"></i> Pilanesberg Game Reserve</li>
-              <li><i class="fas fa-check"></i> Entertainment shows</li>
-              <li><i class="fas fa-check"></i> 3 nights accommodation</li>
-            </ul>
-            
-            <div class="trip-actions">
-              <a class="btn btn-book" href="#contact">Book Now</a>
-              <a class="btn btn-secondary" href="#contact">Enquire</a>
-            </div>
-          </div>
-        </div>
-        
-        <!-- Margate Trip -->
-        <div class="trip-card" data-category="coastal">
-          <div class="trip-header">
-            <h3>Margate Beach Holiday</h3>
-            <div class="trip-date">25 - 28 September 2026</div>
-          </div>
-          <div class="trip-body">
-            <div class="trip-details">
-              <div class="trip-detail">
-                <i class="fas fa-umbrella-beach"></i>
-                <div>Beach</div>
-              </div>
-              <div class="trip-detail">
-                <i class="fas fa-sun"></i>
-                <div>Sunshine Coast</div>
-              </div>
-              <div class="trip-detail">
-                <i class="fas fa-swimmer"></i>
-                <div>Swimming</div>
-              </div>
-            </div>
-            
-            <div class="trip-price">
-              <div class="price-amount">R 6,500</div>
-              <div class="price-note">Per person</div>
-            </div>
-            <p><strong>Note:</strong> Non-refundable deposit of R2,000 due by 31 August 2026</p>
-            <p>Relax on the beautiful beaches of Margate on the KwaZulu-Natal South Coast, known for its warm waters and laid-back atmosphere.</p>
-            
-            <ul class="trip-features">
-              <li><i class="fas fa-check"></i> Beachfront accommodation</li>
-              <li><i class="fas fa-check"></i> Uvongo River Mouth</li>
-              <li><i class="fas fa-check"></i> Shopping at Margate Mall</li>
-              <li><i class="fas fa-check"></i> Beach activities</li>
-              <li><i class="fas fa-check"></i> 3 nights accommodation</li>
-            </ul>
-            
-            <div class="trip-actions">
-              <a class="btn btn-book" href="#contact">Book Now</a>
-              <a class="btn btn-secondary" href="#contact">Enquire</a>
-            </div>
-          </div>
-        </div>
-        
-        <!-- Limpopo Bela Bela Trip -->
-        <div class="trip-card" data-category="safari">
-          <div class="trip-header">
-            <h3>Limpopo Bela Bela</h3>
-            <div class="trip-date">7 - 10 August 2026</div>
-          </div>
-          <div class="trip-body">
-            <div class="trip-details">
-              <div class="trip-detail">
-                <i class="fas fa-hot-tub"></i>
-                <div>Hot Springs</div>
-              </div>
-              <div class="trip-detail">
-                <i class="fas fa-paw"></i>
-                <div>Wildlife</div>
-              </div>
-              <div class="trip-detail">
-                <i class="fas fa-spa"></i>
-                <div>Relaxation</div>
-              </div>
-            </div>
-            
-            <div class="trip-price">
-              <div class="price-amount">R 5,850</div>
-              <div class="price-note">Per person</div>
-            </div>
-            <p><strong>Note:</strong> Non-refundable deposit of R1,800 due by 30 June 2026</p>
-            <p>Experience the warm waters and wildlife of Bela Bela (Warmbaths), known for its natural hot springs and game reserves.</p>
-            
-            <ul class="trip-features">
-              <li><i class="fas fa-check"></i> Natural hot springs</li>
-              <li><i class="fas fa-check"></i> Game farm visits</li>
-              <li><i class="fas fa-check"></i> Spa treatments available</li>
-              <li><i class="fas fa-check"></i> Bushveld experience</li>
-              <li><i class="fas fa-check"></i> 3 nights accommodation</li>
-            </ul>
-            
-            <div class="trip-actions">
-              <a class="btn btn-book" href="#contact">Book Now</a>
-              <a class="btn btn-secondary" href="#contact">Enquire</a>
-            </div>
-          </div>
-        </div>
-      </div>
-      
-      <div style="text-align: center; margin-top: 40px; padding: 20px; background: white; border-radius: 15px; box-shadow: var(--shadow);">
-        <h3 style="color: var(--dark); margin-bottom: 10px;">All Our 2026 Trips</h3>
-        <p style="margin-bottom: 15px;">Join us for unforgettable 3-night adventures across South Africa. All trips include accommodation, guided tours, and transportation from departure points.</p>
-        <p><strong>Departure Points:</strong> Qwa-Qwa • Harrismith • Bethlehem</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- GALLERY SECTION WITHOUT UPLOAD FORM -->
-  <section class="gallery-section" id="gallery">
-    <div class="container">
-      <h2 class="section-title">Our Travel Gallery</h2>
-      <p style="text-align: center; max-width: 800px; margin: 0 auto 40px;">Browse photos from our amazing trips! All photos are managed by the GlobeTrek team.</p>
-      
-      <!-- Gallery Filter -->
-      <div class="gallery-filter">
-        <button class="gallery-filter-btn active" data-filter="all">All Photos</button>
-        <button class="gallery-filter-btn" data-filter="cape-town">Cape Town</button>
-        <button class="gallery-filter-btn" data-filter="mpumalanga">Mpumalanga</button>
-        <button class="gallery-filter-btn" data-filter="beach">Beach Destinations</button>
-        <button class="gallery-filter-btn" data-filter="safari">Safari</button>
-      </div>
-      
-      <!-- Gallery Grid -->
-      <div class="gallery-grid" id="galleryGrid">
-        <!-- Gallery items will be loaded from predefined data -->
-        <div class="no-photos" id="noPhotos">
-          <i class="fas fa-camera"></i>
-          <h3>Gallery Coming Soon</h3>
-          <p>Our team is curating the best photos from our trips.</p>
-          <p style="font-size: 0.9rem; margin-top: 10px;">Check back soon for amazing travel photos!</p>
-        </div>
-      </div>
-      
-      <div style="text-align: center; margin-top: 40px;">
-        <p style="font-style: italic; color: var(--gray);">Click on any photo to view it larger. Use the filter buttons to see photos from specific destinations.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- Lightbox Modal -->
-  <div class="lightbox-modal" id="lightboxModal">
-    <button class="lightbox-close" id="lightboxClose">&times;</button>
-    <button class="lightbox-nav lightbox-prev" id="lightboxPrev">‹</button>
-    <button class="lightbox-nav lightbox-next" id="lightboxNext">›</button>
-    <div class="lightbox-content">
-      <img id="lightboxImage" src="" alt="">
-      <div class="lightbox-caption" id="lightboxCaption"></div>
-    </div>
-  </div>
-
-  <!-- REVIEWS SECTION WITH PHOTO UPLOAD FOR TRAVELERS -->
-  <section class="reviews-section" id="reviews">
-    <div class="container">
-      <h2 class="section-title">Traveler Reviews</h2>
-      <p style="text-align: center; max-width: 800px; margin: 0 auto 40px;">See what our travelers have to say about their GlobeTrek experiences. Share your own review below!</p>
-      
-      <div class="review-form-container">
-        <div class="review-form">
-          <h3>Share Your GlobeTrek Experience</h3>
-          <p style="text-align: center; margin-bottom: 25px;">Traveled with us? We'd love to hear about your experience! You can upload up to 3 photos with your review.</p>
-          
-          <form id="reviewForm">
-            <div class="form-row">
-              <div class="form-group">
-                <label for="reviewerName">Your Name *</label>
-                <input type="text" id="reviewerName" name="reviewerName" placeholder="Enter your full name" required>
-              </div>
-              
-              <div class="form-group">
-                <label for="reviewerEmail">Your Email</label>
-                <input type="email" id="reviewerEmail" name="reviewerEmail" placeholder="Enter your email (optional)">
-              </div>
-            </div>
-            
-            <div class="form-row">
-              <div class="form-group">
-                <label for="reviewDestination">Destination/Tour *</label>
-                <select id="reviewDestination" name="reviewDestination" required>
-                  <option value="">Select a destination</option>
-                  <option value="Cape Town City Tour">Cape Town City Tour</option>
-                  <option value="Mpumalanga Panorama">Mpumalanga Panorama</option>
-                  <option value="Port Elizabeth Coastal">Port Elizabeth Coastal</option>
-                  <option value="North West (Sun City)">North West (Sun City)</option>
-                  <option value="Margate Beach Holiday">Margate Beach Holiday</option>
-                  <option value="Limpopo Bela Bela">Limpopo Bela Bela</option>
-                  <option value="Other">Other</option>
-                </select>
-              </div>
-              
-              <div class="form-group">
-                <label for="reviewDate">Travel Date *</label>
-                <div class="date-picker-row">
-                  <div class="date-picker-group">
-                    <select id="reviewDay" name="reviewDay" required>
-                      <option value="">Day</option>
-                      <!-- Days will be populated by JavaScript -->
-                    </select>
-                  </div>
-                  
-                  <div class="date-picker-group">
-                    <select id="reviewMonth" name="reviewMonth" required>
-                      <option value="">Month</option>
-                      <option value="01">January</option>
-                      <option value="02">February</option>
-                      <option value="03">March</option>
-                      <option value="04">April</option>
-                      <option value="05">May</option>
-                      <option value="06">June</option>
-                      <option value="07">July</option>
-                      <option value="08">August</option>
-                      <option value="09">September</option>
-                      <option value="10">October</option>
-                      <option value="11">November</option>
-                      <option value="12">December</option>
-                    </select>
-                  </div>
-                  
-                  <div class="date-picker-group">
-                    <select id="reviewYear" name="reviewYear" required>
-                      <option value="">Year</option>
-                      <!-- Years will be populated by JavaScript -->
-                    </select>
-                  </div>
-                </div>
-              </div>
-            </div>
-            
-            <div class="form-group">
-              <label>Your Rating *</label>
-              <div class="rating-stars" id="ratingStars">
-                <i class="far fa-star" data-rating="1"></i>
-                <i class="far fa-star" data-rating="2"></i>
-                <i class="far fa-star" data-rating="3"></i>
-                <i class="far fa-star" data-rating="4"></i>
-                <i class="far fa-star" data-rating="5"></i>
-              </div>
-              <input type="hidden" id="ratingValue" name="ratingValue" value="0" required>
-            </div>
-            
-            <div class="form-group full-width">
-              <label for="reviewText">Your Review *</label>
-              <textarea id="reviewText" name="reviewText" placeholder="Tell us about your experience with GlobeTrek Adventures..." required></textarea>
-            </div>
-            
-            <!-- Review Photo Upload Section -->
-            <div class="review-photo-upload">
-              <h4><i class="fas fa-images"></i> Upload Photos from Your Trip (Optional)</h4>
-              <p style="margin-bottom: 15px; font-size: 0.95rem;">You can upload up to 3 photos from your trip. Each photo should be under 2MB.</p>
-              
-              <div class="review-photo-grid" id="reviewPhotoGrid">
-                <!-- Photos will be added here -->
-                <div class="review-photo-item empty" id="addPhotoSlot1">
-                  <i class="fas fa-plus"></i>
-                  <span>Add Photo</span>
-                </div>
-              </div>
-              
-              <div class="photo-counter">
-                Photos: <span id="photoCount">0</span>/3
-              </div>
-              
-              <input type="file" id="reviewPhotoFile" class="review-file-input" accept="image/*">
-            </div>
-            
-            <button type="submit" class="btn" style="width: 100%; padding: 15px; font-size: 1.1rem; margin-top: 20px;">
-              <span id="reviewButtonText">Submit Your Review</span>
-              <span id="reviewSpinner" style="display: none; margin-left: 10px;" class="loading"></span>
-            </button>
-          </form>
-        </div>
-      </div>
-      
-      <div id="reviewsContainer">
-        <div class="reviews-grid" id="reviewsGrid">
-          <!-- Reviews will be displayed here -->
-          <div class="no-reviews" id="noReviews">
-            <i class="fas fa-comments" style="font-size: 3rem; color: var(--primary); margin-bottom: 20px;"></i>
-            <h3>No Reviews Yet</h3>
-            <p>Be the first to share your GlobeTrek experience!</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section id="about">
-    <div class="container">
-      <h2 class="section-title">About GlobeTrek Adventures</h2>
-      <div class="about-content">
-        <div class="about-text">
-          <p>GlobeTrek Adventures specializes in creating unforgettable, tailor-made travel experiences across South Africa. Led by Mr Lefu Mlangeni, we bring you the best of South African tourism.</p>
-          <p>With trips departing from Qwa-Qwa, Harrismith, and Bethlehem, we make it easy for travelers in the Free State to join our amazing adventures.</p>
-          <p>Our 2026 trip calendar is packed with exciting destinations - from the scenic wonders of Mpumalanga to the urban delights of Cape Town. We handle every detail so you can focus on creating memories.</p>
-          <p><strong>Contact:</strong> Mr Lefu Mlangeni | +27 72 558 1629</p>
-          <a class="btn" href="#contact">Join Our Next Adventure</a>
-        </div>
-        <div class="about-image">
-          <img src="https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Beautiful South African landscape with mountains and valleys">
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section id="contact">
-    <div class="container">
-      <div class="contact-content">
-        <h2 class="section-title">Book Your 2026 Adventure</h2>
-        <p>Ready to join one of our amazing 2026 trips? Contact us to secure your spot or enquire about custom travel packages.</p>
-        
-        <div class="contact-options">
-          <div class="contact-card">
-            <i class="fas fa-envelope"></i>
-            <h3>Email Us</h3>
-            <p>Send us an email for detailed information, custom packages, or any questions you may have.</p>
-            <p style="font-size: 1.1rem; font-weight: 600; color: var(--dark); margin-top: 10px; word-break: break-all;">lefumlangeni@icloud.com</p>
-            <a class="btn email-btn" href="mailto:lefumlangeni@icloud.com">Send Email</a>
-          </div>
-          
-          <div class="contact-card">
-            <i class="fab fa-whatsapp"></i>
-            <h3>Quick Booking</h3>
-            <p>Get instant confirmation on WhatsApp. Send us the trip name and dates you're interested in.</p>
-            <a class="btn whatsapp-btn" href="https://wa.me/27725581629?text=Hi%20GlobeTrek!%20I'd%20like%20to%20book%20a%202026%20trip." target="_blank">Book on WhatsApp</a>
-          </div>
-          
-          <div class="contact-card">
-            <i class="fas fa-phone-alt"></i>
-            <h3>Call Directly</h3>
-            <p>Speak directly with Mr Lefu Mlangeni to discuss trip details and make arrangements.</p>
-            <p style="font-size: 1.3rem; font-weight: 600; color: var(--dark); margin-top: 10px;">072 558 1629</p>
-            <p style="font-size: 0.9rem; color: var(--gray); margin-top: 5px;">Mr Lefu Mlangeni</p>
-          </div>
-          
-          <div class="contact-card">
-            <i class="fas fa-map-marker-alt"></i>
-            <h3>Departure Points</h3>
-            <p>We depart from convenient locations in the Free State:</p>
-            <p style="font-weight: 500; color: var(--dark); margin-top: 10px;">Qwa-Qwa • Harrismith • Bethlehem</p>
-            <a class="btn btn-secondary" href="#contact">Get Pickup Details</a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <footer>
-    <div class="container">
-      <div class="footer-content">
-        <div class="footer-column">
-          <div class="logo" style="color: white; margin-bottom: 20px;">
-            <i class="fas fa-globe-americas"></i>
-            <span>GlobeTrek Adventures</span>
-          </div>
-          <p>Creating unforgettable travel experiences across South Africa. Join us for our exciting 2026 trip calendar!</p>
-          <p><strong>Contact:</strong> Mr Lefu Mlangeni | +27 72 558 1629</p>
-          <p><strong>Email:</strong> lefumlangeni@icloud.com</p>
-          <div class="social-icons">
-            <a href="https://www.tiktok.com/@globetrek.adventu6?_r=1&_t=ZS-93cFojYNXBH" target="_blank" class="tiktok-icon">
-              <i class="fab fa-tiktok"></i>
-            </a>
-            <a href="https://chat.whatsapp.com/LgKH84hRitgB0BUuzfbmgC" target="_blank" style="background-color: #25D366;">
-              <i class="fab fa-whatsapp"></i>
-            </a>
-          </div>
-        </div>
-        
-        <div class="footer-column">
-          <h4>2026 Trip Calendar</h4>
-          <ul class="footer-links">
-            <li><a href="#trips">Port Elizabeth (April) - R7,560</a></li>
-            <li><a href="#trips">Mpumalanga (July) - R6,100</a></li>
-            <li><a href="#trips">Sun City (July) - R7,000</a></li>
-            <li><a href="#trips">Bela Bela (August) - R5,850</a></li>
-            <li><a href="#trips">Margate (September) - R6,500</a></li>
-            <li><a href="#trips">Cape Town (October) - R9,900</a></li>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="https://unpkg.com/scrollreveal"></script>
+    <title>GlobeTrek Adventures | Explore The World</title>
+  </head>
+  <body>
+    <header id="home">
+      <nav>
+        <div class="nav__bar">
+          <div class="nav__logo"><a href="#">GlobeTrek Adventures.</a></div>
+          <ul class="nav__links">
+            <li class="link"><a href="#home">Home</a></li>
+            <li class="link"><a href="#about">About Us</a></li>
+            <li class="link"><a href="#discover">Destinations</a></li>
+            <li class="link"><a href="#blog">Blog</a></li>
+            <li class="link"><a href="#trips">Upcoming Trips</a></li>
+            <li class="link"><a href="#gallery">Gallery</a></li>
+            <li class="link"><a href="#contact">Contact</a></li>
+            <li class="link search">
+              <span><i class="ri-search-line"></i></span>
+            </li>
           </ul>
         </div>
-        
-        <div class="footer-column">
-          <h4>Quick Links</h4>
-          <ul class="footer-links">
-            <li><a href="#home">Home</a></li>
-            <li><a href="#trips">Upcoming Trips</a></li>
-            <li><a href="#gallery">Gallery</a></li>
-            <li><a href="#reviews">Reviews</a></li>
-            <li><a href="#about">About Us</a></li>
-            <li><a href="#contact">Book Now</a></li>
-          </ul>
-        </div>
+      </nav>
+      <div class="section__container header__container">
+        <h1>The new way to plan your next adventure</h1>
+        <h4>Explore the colourful world with us</h4>
+        <button class="btn" onclick="scrollToTrips()">
+          Book With Us <i class="ri-calendar-event-line"></i>
+        </button>
       </div>
-      
-      <div class="copyright">
-        <p>&copy; 2026 GlobeTrek Adventures. All rights reserved. | South African Travel Specialists</p>
-        <p style="margin-top: 10px;">All prices in South African Rand (ZAR) | Departures from Qwa-Qwa, Harrismith, Bethlehem</p>
-      </div>
-    </div>
-  </footer>
+    </header>
 
-  <!-- Floating WhatsApp Button -->
-  <a href="https://wa.me/27725581629?text=Hi%20GlobeTrek!%20I'd%20like%20to%20book%20a%202026%20trip." 
-     target="_blank" 
-     class="floating-whatsapp">
-     <i class="fab fa-whatsapp"></i>
-  </a>
-
-  <script>
-    // Mobile menu toggle
-    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-    const navLinks = document.getElementById('navLinks');
-    
-    mobileMenuBtn.addEventListener('click', () => {
-      navLinks.classList.toggle('active');
-      mobileMenuBtn.innerHTML = navLinks.classList.contains('active') 
-        ? '<i class="fas fa-times"></i>' 
-        : '<i class="fas fa-bars"></i>';
-    });
-    
-    // Close mobile menu when clicking a link
-    document.querySelectorAll('.nav-links a').forEach(link => {
-      link.addEventListener('click', () => {
-        navLinks.classList.remove('active');
-        mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
-      });
-    });
-    
-    // Smooth scrolling for anchor links
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function(e) {
-        e.preventDefault();
-        
-        const targetId = this.getAttribute('href');
-        if(targetId === '#') return;
-        
-        const targetElement = document.querySelector(targetId);
-        if(targetElement) {
-          window.scrollTo({
-            top: targetElement.offsetTop - 80,
-            behavior: 'smooth'
-          });
-        }
-      });
-    });
-    
-    // Add active class to nav links on scroll
-    window.addEventListener('scroll', () => {
-      const sections = document.querySelectorAll('section');
-      const navLinks = document.querySelectorAll('.nav-links a');
-      
-      let current = '';
-      sections.forEach(section => {
-        const sectionTop = section.offsetTop;
-        const sectionHeight = section.clientHeight;
-        if(pageYOffset >= sectionTop - 100) {
-          current = section.getAttribute('id');
-        }
-      });
-      
-      navLinks.forEach(link => {
-        link.classList.remove('active');
-        if(link.getAttribute('href') === `#${current}`) {
-          link.classList.add('active');
-        }
-      });
-    });
-    
-    // Trip filtering functionality
-    document.querySelectorAll('.filter-btn').forEach(button => {
-      button.addEventListener('click', function() {
-        // Update active button
-        document.querySelectorAll('.filter-btn').forEach(btn => {
-          btn.classList.remove('active');
-        });
-        this.classList.add('active');
-        
-        const filter = this.getAttribute('data-filter');
-        const tripCards = document.querySelectorAll('.trip-card');
-        
-        tripCards.forEach(card => {
-          if (filter === 'all' || card.getAttribute('data-category') === filter) {
-            card.style.display = 'block';
-            setTimeout(() => {
-              card.style.opacity = '1';
-              card.style.transform = 'translateY(0)';
-            }, 10);
-          } else {
-            card.style.opacity = '0';
-            card.style.transform = 'translateY(20px)';
-            setTimeout(() => {
-              card.style.display = 'none';
-            }, 300);
-          }
-        });
-      });
-    });
-    
-    // Gallery filtering functionality
-    document.querySelectorAll('.gallery-filter-btn').forEach(button => {
-      button.addEventListener('click', function() {
-        // Update active button
-        document.querySelectorAll('.gallery-filter-btn').forEach(btn => {
-          btn.classList.remove('active');
-        });
-        this.classList.add('active');
-        
-        const filter = this.getAttribute('data-filter');
-        const galleryItems = document.querySelectorAll('.gallery-item');
-        
-        galleryItems.forEach(item => {
-          if (filter === 'all' || item.getAttribute('data-category') === filter) {
-            item.style.display = 'block';
-            setTimeout(() => {
-              item.style.opacity = '1';
-              item.style.transform = 'translateY(0)';
-            }, 10);
-          } else {
-            item.style.opacity = '0';
-            item.style.transform = 'translateY(20px)';
-            setTimeout(() => {
-              item.style.display = 'none';
-            }, 300);
-          }
-        });
-      });
-    });
-    
-    // WhatsApp booking with trip details
-    document.querySelectorAll('.btn-book').forEach(button => {
-      button.addEventListener('click', function(e) {
-        e.preventDefault();
-        const tripCard = this.closest('.trip-card');
-        const tripTitle = tripCard.querySelector('h3').textContent;
-        const tripDate = tripCard.querySelector('.trip-date').textContent;
-        const tripPrice = tripCard.querySelector('.price-amount').textContent;
-        
-        const message = `Hi GlobeTrek! I'd like to book the following trip:\n\nTrip: ${tripTitle}\nDate: ${tripDate}\nPrice: ${tripPrice}\n\nPlease confirm availability and booking details.`;
-        const encodedMessage = encodeURIComponent(message);
-        
-        window.open(`https://wa.me/27725581629?text=${encodedMessage}`, '_blank');
-      });
-    });
-    
-    // ==================== GALLERY DATA (Predefined - Backend Managed) ====================
-    
-    // Predefined gallery photos (these would be managed from backend in a real application)
-    const galleryPhotos = [
-      {
-        id: 1,
-        title: "Table Mountain Adventure",
-        category: "cape-town",
-        description: "Breathtaking view from the top of Table Mountain",
-        imageUrl: "https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
-        date: "2025-10-15"
-      },
-      {
-        id: 2,
-        title: "Mpumalanga Panorama View",
-        category: "mpumalanga",
-        description: "God's Window viewpoint in Mpumalanga",
-        imageUrl: "https://images.unsplash.com/photo-1536152477996-8a5dfe05f0ef?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
-        date: "2025-07-10"
-      },
-      {
-        id: 3,
-        title: "Sun City Resort Luxury",
-        category: "safari",
-        description: "Luxury experience at Sun City Resort",
-        imageUrl: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
-        date: "2025-07-03"
-      },
-      {
-        id: 4,
-        title: "Port Elizabeth Beaches",
-        category: "beach",
-        description: "Beautiful beaches of Port Elizabeth",
-        imageUrl: "https://images.unsplash.com/photo-1544551763-46a013bb70d5?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
-        date: "2025-04-24"
-      },
-      {
-        id: 5,
-        title: "Blyde River Canyon",
-        category: "mpumalanga",
-        description: "Spectacular views of Blyde River Canyon",
-        imageUrl: "https://images.unsplash.com/photo-1589552950456-75eeaf5c6f65?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
-        date: "2025-07-11"
-      },
-      {
-        id: 6,
-        title: "Cape Town Waterfront",
-        category: "cape-town",
-        description: "Vibrant V&A Waterfront in Cape Town",
-        imageUrl: "https://images.unsplash.com/photo-1592400420056-9069f6d6c539?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
-        date: "2025-10-16"
-      }
-    ];
-    
-    // Display gallery photos
-    function displayGalleryPhotos() {
-      const galleryGrid = document.getElementById('galleryGrid');
-      const noPhotos = document.getElementById('noPhotos');
-      
-      galleryGrid.innerHTML = '';
-      
-      if (galleryPhotos.length === 0) {
-        noPhotos.style.display = 'block';
-        galleryGrid.appendChild(noPhotos);
-        return;
-      }
-      
-      noPhotos.style.display = 'none';
-      
-      // Display all gallery photos
-      galleryPhotos.forEach((photo, index) => {
-        const galleryItem = document.createElement('div');
-        galleryItem.className = 'gallery-item';
-        galleryItem.setAttribute('data-category', photo.category);
-        galleryItem.setAttribute('data-index', index);
-        
-        galleryItem.innerHTML = `
-          <img src="${photo.imageUrl}" alt="${photo.title}" loading="lazy">
-          <div class="gallery-overlay">
-            <h4>${photo.title}</h4>
-            <p>${photo.description}</p>
+    <section class="about" id="about">
+      <div class="section__container about__container">
+        <div class="about__content">
+          <h2 class="section__header">About us</h2>
+          <p class="section__subheader">
+            GlobeTrek Adventures is a travel brand driven by passion, 
+            curiosity, and a love for meaningful experiences. 
+            We specialize in creating unforgettable journeys that 
+            connect people to the world's most beautiful destinations, 
+            rich cultures, and authentic local experiences. From breathtaking 
+            landscapes and wildlife encounters to vibrant cities and hidden gems, 
+            we design trips that inspire exploration and lasting memories.
+          </p>
+          <p class="section__subheader">
+            At GlobeTrek Adventures, we believe travel is more than just visiting places
+            — it's about stories, connections, and moments that stay with you long after the 
+            journey ends. Our team is committed to personalized service, carefully crafted 
+            itineraries, and responsible tourism that respects communities and nature.
+          </p>
+          <div class="about__flex">
+            <div class="about__card">
+              <h4>13</h4>
+              <p>Completed Trips</p>
+            </div>
+            <div class="about__card">
+              <h4>2</h4>
+              <p>Tour Guides</p>
+            </div>
+            <div class="about__card">
+              <h4>13</h4>
+              <p>Destinations</p>
+            </div>
           </div>
-        `;
-        
-        galleryGrid.appendChild(galleryItem);
-        
-        // Add click event for lightbox
-        galleryItem.addEventListener('click', function() {
-          openLightbox(index);
-        });
-      });
-    }
-    
-    // ==================== REVIEW SYSTEM WITH PHOTO UPLOAD ====================
-    
-    // Star rating system
-    const stars = document.querySelectorAll('.rating-stars i');
-    const ratingValue = document.getElementById('ratingValue');
-    
-    stars.forEach(star => {
-      star.addEventListener('click', function() {
-        const rating = this.getAttribute('data-rating');
-        ratingValue.value = rating;
-        
-        stars.forEach(s => {
-          if (s.getAttribute('data-rating') <= rating) {
-            s.classList.remove('far');
-            s.classList.add('fas', 'active');
-          } else {
-            s.classList.remove('fas', 'active');
-            s.classList.add('far');
-          }
-        });
-      });
-      
-      star.addEventListener('mouseover', function() {
-        const rating = this.getAttribute('data-rating');
-        
-        stars.forEach(s => {
-          if (s.getAttribute('data-rating') <= rating) {
-            s.classList.remove('far');
-            s.classList.add('fas');
-          } else {
-            s.classList.remove('fas');
-            s.classList.add('far');
-          }
-        });
-      });
-    });
-    
-    // Reset stars on mouse leave
-    document.querySelector('.rating-stars').addEventListener('mouseleave', function() {
-      const currentRating = ratingValue.value;
-      
-      stars.forEach(s => {
-        if (s.getAttribute('data-rating') <= currentRating) {
-          s.classList.remove('far');
-          s.classList.add('fas', 'active');
-        } else {
-          s.classList.remove('fas', 'active');
-          s.classList.add('far');
-        }
-      });
-    });
-    
-    // Populate day dropdown (1-31)
-    const daySelect = document.getElementById('reviewDay');
-    for (let i = 1; i <= 31; i++) {
-      const option = document.createElement('option');
-      option.value = i < 10 ? '0' + i : i.toString();
-      option.textContent = i;
-      daySelect.appendChild(option);
-    }
-    
-    // Populate year dropdown (last 5 years to current year)
-    const yearSelect = document.getElementById('reviewYear');
-    const currentYear = new Date().getFullYear();
-    for (let i = currentYear; i >= currentYear - 5; i--) {
-      const option = document.createElement('option');
-      option.value = i.toString();
-      option.textContent = i;
-      yearSelect.appendChild(option);
-    }
-    
-    // Review photo upload functionality
-    const reviewPhotoGrid = document.getElementById('reviewPhotoGrid');
-    const reviewPhotoFileInput = document.getElementById('reviewPhotoFile');
-    const photoCountElement = document.getElementById('photoCount');
-    const reviewButtonText = document.getElementById('reviewButtonText');
-    const reviewSpinner = document.getElementById('reviewSpinner');
-    let reviewPhotos = []; // Array to hold base64 strings of uploaded photos
-    
-    // Handle adding photos for review
-    function handleReviewPhotoUpload() {
-      const file = reviewPhotoFileInput.files[0];
-      
-      if (!file) return;
-      
-      // Check file size (max 2MB)
-      if (file.size > 2 * 1024 * 1024) {
-        alert('Each photo must be less than 2MB');
-        return;
-      }
-      
-      // Check file type
-      if (!file.type.match('image.*')) {
-        alert('Please select an image file (JPEG, PNG, JPG)');
-        return;
-      }
-      
-      // Check if we already have 3 photos
-      if (reviewPhotos.length >= 3) {
-        alert('You can only upload up to 3 photos with your review.');
-        return;
-      }
-      
-      const reader = new FileReader();
-      reader.onload = function(e) {
-        reviewPhotos.push({
-          dataUrl: e.target.result,
-          name: file.name,
-          size: file.size
-        });
-        
-        updateReviewPhotoGrid();
-      };
-      reader.readAsDataURL(file);
-      
-      // Reset file input
-      reviewPhotoFileInput.value = '';
-    }
-    
-    // Update the review photo grid display
-    function updateReviewPhotoGrid() {
-      reviewPhotoGrid.innerHTML = '';
-      
-      // Display uploaded photos
-      reviewPhotos.forEach((photo, index) => {
-        const photoItem = document.createElement('div');
-        photoItem.className = 'review-photo-item';
-        photoItem.innerHTML = `
-          <img src="${photo.dataUrl}" alt="Review photo ${index + 1}">
-          <button class="remove-review-photo" data-index="${index}">
-            <i class="fas fa-times"></i>
+          <button class="btn" onclick="scrollToTrips()">
+            Book Your Trip <i class="ri-calendar-event-line"></i>
           </button>
-        `;
-        reviewPhotoGrid.appendChild(photoItem);
-        
-        // Add remove button event
-        photoItem.querySelector('.remove-review-photo').addEventListener('click', function(e) {
-          e.stopPropagation();
-          removeReviewPhoto(index);
-        });
-      });
-      
-      // Add empty slots for remaining photos
-      const remainingSlots = 3 - reviewPhotos.length;
-      for (let i = 0; i < remainingSlots; i++) {
-        const emptySlot = document.createElement('div');
-        emptySlot.className = 'review-photo-item empty';
-        emptySlot.innerHTML = `
-          <i class="fas fa-plus"></i>
-          <span>Add Photo</span>
-        `;
-        emptySlot.addEventListener('click', () => {
-          reviewPhotoFileInput.click();
-        });
-        reviewPhotoGrid.appendChild(emptySlot);
-      }
-      
-      // Update photo counter
-      photoCountElement.textContent = reviewPhotos.length;
-    }
-    
-    // Remove a review photo
-    function removeReviewPhoto(index) {
-      reviewPhotos.splice(index, 1);
-      updateReviewPhotoGrid();
-    }
-    
-    // Trigger file input when clicking empty slot
-    reviewPhotoGrid.addEventListener('click', function(e) {
-      if (e.target.closest('.review-photo-item.empty')) {
-        reviewPhotoFileInput.click();
-      }
-    });
-    
-    // Handle file selection for review photos
-    reviewPhotoFileInput.addEventListener('change', handleReviewPhotoUpload);
-    
-    // Load existing reviews from localStorage
-    let reviews = JSON.parse(localStorage.getItem('globeTrekReviews')) || [];
-    const reviewsGrid = document.getElementById('reviewsGrid');
-    const noReviews = document.getElementById('noReviews');
-    
-    function displayReviews() {
-      reviewsGrid.innerHTML = '';
-      
-      if (reviews.length === 0) {
-        noReviews.style.display = 'block';
-        reviewsGrid.appendChild(noReviews);
-        return;
-      }
-      
-      noReviews.style.display = 'none';
-      
-      // Sort reviews by date (newest first)
-      reviews.sort((a, b) => new Date(b.date) - new Date(a.date));
-      
-      // Display all reviews
-      reviews.forEach((review, index) => {
-        const reviewCard = document.createElement('div');
-        reviewCard.className = 'review-card';
-        
-        // Format date
-        const reviewDate = new Date(review.date);
-        const formattedDate = reviewDate.toLocaleDateString('en-GB', {
-          day: 'numeric',
-          month: 'long',
-          year: 'numeric'
-        });
-        
-        // Create stars HTML
-        let starsHtml = '';
-        for (let i = 1; i <= 5; i++) {
-          if (i <= review.rating) {
-            starsHtml += '<i class="fas fa-star"></i>';
-          } else {
-            starsHtml += '<i class="far fa-star"></i>';
-          }
-        }
-        
-        // Create photos HTML if review has photos
-        let photosHtml = '';
-        if (review.photos && review.photos.length > 0) {
-          photosHtml = '<div class="review-photos">';
-          review.photos.forEach((photo, photoIndex) => {
-            photosHtml += `
-              <div class="review-photo-thumb" data-review-index="${index}" data-photo-index="${photoIndex}">
-                <img src="${photo.dataUrl}" alt="Review photo ${photoIndex + 1}">
-              </div>
-            `;
-          });
-          photosHtml += '</div>';
-        }
-        
-        reviewCard.innerHTML = `
-          <div class="review-header">
-            <div class="reviewer-info">
-              <h4>${review.name}</h4>
-              <div class="review-date">${formattedDate}</div>
-              <div class="review-destination">${review.destination}</div>
+        </div>
+        <div class="about__image">
+          <img src="assets/about.jpeg" alt="about" />
+        </div>
+      </div>
+    </section>
+
+    <section class="discover" id="discover">
+      <div class="section__container discover__container">
+        <h2 class="section__header">Popular Destinations</h2>
+        <p class="section__subheader">
+          Discover our most sought-after travel destinations.
+        </p>
+        <div class="discover__grid">
+          <div class="discover__card">
+            <div class="discover__image">
+              <img src="assets/discover-1.jpeg" alt="Mpumalanga" />
             </div>
-            <div class="review-rating">
-              ${starsHtml}
+            <div class="discover__card__content">
+              <h4>Mpumalanga</h4>
+              <p>
+                Mpumalanga, the Place Where the Sun Rises, is a land of
+                breathtaking landscapes, rich culture, and untamed beauty. 
+                From misty mountains and flowing waterfalls to vibrant wildlife
+                and warm hospitality, it invites you to slow down, explore deeply, 
+                and leave with unforgettable memories.
+              </p>
+              <button class="discover__btn" onclick="scrollToTrips()">
+                Book Now <i class="ri-calendar-event-line"></i>
+              </button>
             </div>
           </div>
-          <div class="review-text">"${review.text}"</div>
-          ${photosHtml}
-        `;
+          <div class="discover__card">
+            <div class="discover__image">
+              <img src="assets/discover-2.jpeg" alt="Thailand" />
+            </div>
+            <div class="discover__card__content">
+              <h4>Thailand</h4>
+              <p>
+                Thailand is a vibrant blend of ancient tradition and modern energy. 
+                Golden temples, tropical beaches, and bustling street markets create 
+                unforgettable experiences. 
+                From serene islands to lively cities,
+                Thailand welcomes visitors with warm smiles, rich culture, and flavors that linger long after the journey ends.
+              </p>
+              <button class="discover__btn" onclick="scrollToTrips()">
+                Book Now <i class="ri-calendar-event-line"></i>
+              </button>
+            </div>
+          </div>
+          <div class="discover__card">
+            <div class="discover__image">
+              <img src="assets/singapore.jpeg" alt="Singapore" />
+            </div>
+            <div class="discover__card__content">
+              <h4>Singapore</h4>
+              <p>
+                Singapore is a dynamic city where innovation meets tradition. 
+                Sleek skylines, lush gardens, and diverse cultures coexist seamlessly. 
+                From world-class cuisine to spotless streets and iconic attractions, 
+                Singapore offers a refined yet exciting experience—efficient, multicultural, 
+                and endlessly fascinating for every kind of traveler.
+              </p>
+              <button class="discover__btn" onclick="scrollToTrips()">
+                Book Now <i class="ri-calendar-event-line"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="blogs" id="blog">
+      <div class="blogs__container">
+        <h2 class="section__header">Latest on the blogs</h2>
+        <p class="section__subheader">We want to help you to travel better!</p>
+        <div class="blogs__grid">
+          <div class="blogs__card">
+            <img src="assets/blog-1.jpeg" alt="blog" />
+            <div class="blogs__content">
+              10 mistakes every first time traveller will make and how to avoid
+              them!
+            </div>
+          </div>
+          <div class="blogs__card">
+            <img src="assets/blog-2.jpeg" alt="blog" />
+            <div class="blogs__content">
+              What's it really like to move to a country where you don't speak
+              the language?
+            </div>
+          </div>
+          <div class="blogs__card">
+            <img src="assets/blog-3.jpeg" alt="blog" />
+            <div class="blogs__content">
+              Exploring the quite corners of Thailand, Phuket and Patong.
+            </div>
+          </div>
+          <div class="blogs__card">
+            <img src="assets/blog-4.jpeg" alt="blog" />
+            <div class="blogs__content">
+              11 things to know before you visit Mpumalanga.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- UPCOMING TRIPS SECTION -->
+    <section class="trips" id="trips">
+      <div class="section__container trips__container">
+        <h2 class="section__header">Upcoming Trips</h2>
+        <p class="section__subheader">
+          Book your adventure with us! All trips are sorted by departure date.
+        </p>
         
-        reviewsGrid.appendChild(reviewCard);
+        <div class="trips__controls">
+          <div class="trips__filter">
+            <label for="sortTrips">Sort by:</label>
+            <select id="sortTrips">
+              <option value="date-asc">Date (Earliest First)</option>
+              <option value="date-desc">Date (Latest First)</option>
+              <option value="price-asc">Price (Low to High)</option>
+              <option value="price-desc">Price (High to Low)</option>
+              <option value="duration">Duration</option>
+            </select>
+          </div>
+          <div class="trips__search">
+            <div class="search-wrapper">
+              <i class="ri-search-line"></i>
+              <input type="text" id="tripSearch" placeholder="Search trips by destination or name...">
+            </div>
+            <button class="btn btn-clear" id="clearSearch">Clear</button>
+          </div>
+        </div>
         
-        // Add click events for review photos
-        reviewCard.querySelectorAll('.review-photo-thumb').forEach(thumb => {
-          thumb.addEventListener('click', function() {
-            const reviewIndex = this.getAttribute('data-review-index');
-            const photoIndex = this.getAttribute('data-photo-index');
-            openReviewPhotoLightbox(reviewIndex, photoIndex);
-          });
-        });
-      });
-    }
-    
-    // Display existing reviews on page load
-    displayReviews();
-    
-    // Review form submission
-    document.getElementById('reviewForm').addEventListener('submit', function(e) {
-      e.preventDefault();
-      
-      const name = document.getElementById('reviewerName').value.trim();
-      const email = document.getElementById('reviewerEmail').value.trim();
-      const destination = document.getElementById('reviewDestination').value;
-      const day = document.getElementById('reviewDay').value;
-      const month = document.getElementById('reviewMonth').value;
-      const year = document.getElementById('reviewYear').value;
-      const rating = document.getElementById('ratingValue').value;
-      const text = document.getElementById('reviewText').value.trim();
-      
-      if (rating === "0") {
-        alert("Please provide a rating by clicking on the stars.");
-        return;
-      }
-      
-      if (!day || !month || !year) {
-        alert("Please select a complete travel date (day, month, and year).");
-        return;
-      }
-      
-      // Create date string from day, month, year
-      const dateString = `${year}-${month}-${day}`;
-      
-      // Create new review object
-      const newReview = {
-        id: Date.now(),
-        name: name,
-        email: email || 'Not provided',
-        destination: destination,
-        date: dateString,
-        rating: parseInt(rating),
-        text: text,
-        photos: reviewPhotos.map(photo => ({
-          dataUrl: photo.dataUrl,
-          name: photo.name
-        }))
-      };
-      
-      // Add to reviews array
-      reviews.push(newReview);
-      
-      // Save to localStorage
-      localStorage.setItem('globeTrekReviews', JSON.stringify(reviews));
-      
-      // Display updated reviews
-      displayReviews();
-      
-      // Show success message
-      alert(`Thank you, ${name}! Your review has been submitted successfully.${reviewPhotos.length > 0 ? ' Your photos have been added to your review.' : ''}`);
-      
-      // Reset form
-      this.reset();
-      ratingValue.value = "0";
-      stars.forEach(s => {
-        s.classList.remove('fas', 'active');
-        s.classList.add('far');
-      });
-      
-      // Reset review photos
-      reviewPhotos = [];
-      updateReviewPhotoGrid();
-      
-      // Reset date selects
-      document.getElementById('reviewDay').value = '';
-      document.getElementById('reviewMonth').value = '';
-      document.getElementById('reviewYear').value = '';
-      
-      // Scroll to reviews section
-      document.getElementById('reviews').scrollIntoView({ behavior: 'smooth' });
-    });
-    
-    // ==================== LIGHTBOX FUNCTIONALITY ====================
-    
-    const lightboxModal = document.getElementById('lightboxModal');
-    const lightboxImage = document.getElementById('lightboxImage');
-    const lightboxCaption = document.getElementById('lightboxCaption');
-    const lightboxClose = document.getElementById('lightboxClose');
-    const lightboxPrev = document.getElementById('lightboxPrev');
-    const lightboxNext = document.getElementById('lightboxNext');
-    
-    let currentImageIndex = 0;
-    let filteredGalleryItems = [];
-    
-    // Open lightbox for gallery
-    function openLightbox(index) {
-      // Get all currently visible gallery items (after filtering)
-      const activeFilter = document.querySelector('.gallery-filter-btn.active').getAttribute('data-filter');
-      
-      if (activeFilter === 'all') {
-        filteredGalleryItems = Array.from(document.querySelectorAll('.gallery-item'));
-      } else {
-        filteredGalleryItems = Array.from(document.querySelectorAll('.gallery-item')).filter(item => 
-          item.getAttribute('data-category') === activeFilter
-        );
-      }
-      
-      currentImageIndex = index;
-      updateLightbox();
-      lightboxModal.classList.add('active');
-      document.body.style.overflow = 'hidden';
-    }
-    
-    // Open lightbox for review photos
-    function openReviewPhotoLightbox(reviewIndex, photoIndex) {
-      const review = reviews[reviewIndex];
-      if (!review || !review.photos || !review.photos[photoIndex]) return;
-      
-      lightboxImage.src = review.photos[photoIndex].dataUrl;
-      lightboxImage.alt = `Photo from ${review.name}'s review`;
-      lightboxCaption.textContent = `Photo from ${review.name}'s review of ${review.destination}`;
-      
-      lightboxModal.classList.add('active');
-      document.body.style.overflow = 'hidden';
-    }
-    
-    // Update lightbox content
-    function updateLightbox() {
-      if (filteredGalleryItems.length > 0 && currentImageIndex >= 0 && currentImageIndex < filteredGalleryItems.length) {
-        const currentItem = filteredGalleryItems[currentImageIndex];
-        const img = currentItem.querySelector('img');
-        const title = currentItem.querySelector('h4').textContent;
-        const description = currentItem.querySelector('p').textContent;
+        <div class="trips-grid" id="tripsGrid">
+          <!-- Trips will be loaded dynamically by JavaScript -->
+        </div>
         
-        lightboxImage.src = img.src;
-        lightboxImage.alt = img.alt;
-        lightboxCaption.textContent = `${title} - ${description}`;
-      }
-    }
-    
-    // Close lightbox
-    lightboxClose.addEventListener('click', () => {
-      lightboxModal.classList.remove('active');
-      document.body.style.overflow = 'auto';
-    });
-    
-    // Click outside image to close
-    lightboxModal.addEventListener('click', (e) => {
-      if (e.target === lightboxModal) {
-        lightboxModal.classList.remove('active');
-        document.body.style.overflow = 'auto';
-      }
-    });
-    
-    // Keyboard navigation
-    document.addEventListener('keydown', (e) => {
-      if (lightboxModal.classList.contains('active')) {
-        if (e.key === 'Escape') {
-          lightboxModal.classList.remove('active');
-          document.body.style.overflow = 'auto';
-        } else if (e.key === 'ArrowLeft') {
-          navigateGallery('prev');
-        } else if (e.key === 'ArrowRight') {
-          navigateGallery('next');
-        }
-      }
-    });
-    
-    // Previous image
-    lightboxPrev.addEventListener('click', () => navigateGallery('prev'));
-    
-    // Next image
-    lightboxNext.addEventListener('click', () => navigateGallery('next'));
-    
-    function navigateGallery(direction) {
-      if (direction === 'prev') {
-        currentImageIndex = (currentImageIndex - 1 + filteredGalleryItems.length) % filteredGalleryItems.length;
-      } else if (direction === 'next') {
-        currentImageIndex = (currentImageIndex + 1) % filteredGalleryItems.length;
-      }
-      updateLightbox();
-    }
-    
-    // Display gallery photos on page load
-    displayGalleryPhotos();
-    
-    // Add some sample reviews if none exist
-    if (reviews.length === 0) {
-      const sampleReviews = [
-        {
-          id: 1,
-          name: "Sarah Johnson",
-          email: "sarah@example.com",
-          destination: "Mpumalanga Panorama",
-          date: "2025-07-15",
-          rating: 5,
-          text: "Absolutely breathtaking! The Panorama Route was everything we hoped for and more. Our guide was knowledgeable and made the experience unforgettable."
-        },
-        {
-          id: 2,
-          name: "James Wilson",
-          email: "james@example.com",
-          destination: "Cape Town City Tour",
-          date: "2025-10-20",
-          rating: 4,
-          text: "Great tour organization! Table Mountain was spectacular. The shuttle service was punctual and our accommodation was comfortable."
-        }
-      ];
-      
-      // Add sample reviews
-      reviews = sampleReviews;
-      localStorage.setItem('globeTrekReviews', JSON.stringify(reviews));
-      displayReviews();
-    }
-    
-    // Initialize review photo grid
-    updateReviewPhotoGrid();
-  </script>
-</body>
+        <div class="trips__notice">
+          <i class="ri-information-line"></i>
+          <p>All prices are in South African Rands (ZAR) per person. Click "Book Now" to see destination preview and confirm booking.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- BOOKING MODAL -->
+    <div class="booking-modal" id="bookingModal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2 id="modalTripTitle">Confirm Your Booking</h2>
+          <button class="modal-close" onclick="closeBookingModal()">
+            <i class="ri-close-line"></i>
+          </button>
+        </div>
+        
+        <div class="modal-body">
+          <div class="destination-preview">
+            <h3>Destination Preview</h3>
+            <p id="modalTripDescription"></p>
+            
+            <div class="preview-images" id="previewImages">
+              <!-- Images will be loaded dynamically -->
+            </div>
+            
+            <div class="trip-details-modal">
+              <div class="detail-row">
+                <div class="detail-item">
+                  <i class="ri-calendar-line"></i>
+                  <div>
+                    <strong>Dates:</strong>
+                    <span id="modalTripDates"></span>
+                  </div>
+                </div>
+                <div class="detail-item">
+                  <i class="ri-money-rand-circle-line"></i>
+                  <div>
+                    <strong>Price:</strong>
+                    <span id="modalTripPrice"></span>
+                  </div>
+                </div>
+              </div>
+              <div class="detail-row">
+                <div class="detail-item">
+                  <i class="ri-time-line"></i>
+                  <div>
+                    <strong>Duration:</strong>
+                    <span id="modalTripDuration"></span>
+                  </div>
+                </div>
+                <div class="detail-item">
+                  <i class="ri-bank-card-line"></i>
+                  <div>
+                    <strong>Deposit:</strong>
+                    <span id="modalTripDeposit"></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="booking-confirmation">
+            <h3>Ready to Book?</h3>
+            <p>You're about to book <strong id="modalTripName"></strong>. This will open WhatsApp to complete your booking with our travel consultant.</p>
+            
+            <div class="confirmation-options">
+              <button class="btn btn-confirm" onclick="confirmBooking()">
+                <i class="ri-whatsapp-line"></i> Yes, Book Now via WhatsApp
+              </button>
+              <button class="btn btn-secondary" onclick="closeBookingModal()">
+                <i class="ri-close-line"></i> No, Not Yet
+              </button>
+            </div>
+            
+            <div class="booking-note">
+              <i class="ri-information-line"></i>
+              <p>Booking requires a non-refundable deposit. Full payment details will be provided via WhatsApp.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <section class="hero">
+      <div class="section__container hero__container">
+        <h2>"The world is a book, and those who do not travel read only a page."</h2>
+        <p>GlobeTrek Adventures</p>
+      </div>
+    </section>
+
+    <section class="gallery" id="gallery">
+      <div class="gallery__container">
+        <h2 class="section__header">Gallery photos</h2>
+        <p class="section__subheader">
+          Explore the most beautiful places in the world.
+        </p>
+        <div class="gallery__grid">
+          <div class="gallery__card">
+            <img src="assets/gallery-1.jpeg" alt="gallery" />
+            <div class="gallery__content">
+              <h4>Beyond Kata. Phuket</h4>
+              <p>Thailand</p>
+            </div>
+          </div>
+          <div class="gallery__card">
+            <img src="assets/gallery-6.jpeg" alt="gallery" />
+            <div class="gallery__content">
+              <h4>Ukuthola Lion Lodge</h4>
+              <p>North West, Brits</p>
+            </div>
+          </div>
+          <div class="gallery__card">
+            <img src="assets/gallery-3.jpeg" alt="gallery" />
+            <div class="gallery__content">
+              <h4>Banana Beach</h4>
+              <p>Thailand</p>
+            </div>
+          </div>
+          <div class="gallery__card">
+            <img src="assets/gallery-4.jpeg" alt="gallery" />
+            <div class="gallery__content">
+              <h4>Phi-Phi islands</h4>
+              <p>Thailand</p>
+            </div>
+          </div>
+          <div class="gallery__card">
+            <img src="assets/Group.jpeg" alt="gallery" />
+            <div class="gallery__content">
+              <h4>Mpumalanga</h4>
+              <p>Panorama Chalets</p>
+            </div>
+          </div>
+           <div class="gallery__card">
+            <img src="assets/Background.jpeg" alt="gallery" />
+            <div class="gallery__content">
+              <h4>Mpumalanga</h4>
+              <p>Graskop</p>
+        </div>
+      </div>
+       <div class="gallery__card">
+            <img src="assets/blog-1.jpeg" alt="gallery" />
+            <div class="gallery__content">
+              <h4>Mpumalanga</h4>
+              <p>Blyde River Canyon</p>
+        </div>
+      </div>
+       <div class="gallery__card">
+            <img src="assets/blog-2.jpeg" alt="gallery" />
+            <div class="gallery__content">
+              <h4>Mpumalanga</h4>
+              <p>Graskop George</p>
+                  </div>
+      </div>
+       <div class="gallery__card">
+            <img src="assets/BlydeRiver.jpeg" alt="gallery" />
+            <div class="gallery__content">
+              <h4>Mpumalanga</h4>
+              <p>Boat Cruise</p>
+    </section>
+
+    <section class="contact" id="contact">
+      <div class="section__container contact__container">
+        <div class="contact__col contact__info">
+          <h4>Contact a travel researcher</h4>
+          <p>We always aim to reply within 24 hours.</p>
+          <p><strong>Pick Up Points:</strong> Qwa-Qwa - Harrismith - Bethlehem</p>
+          <p><strong>Follow us on social media:</strong></p>
+          <div class="contact__socials">
+            <a href="https://www.tiktok.com/@globetrek.adventu6?_r=1&_t=ZS-93cFojYNXBH" 
+               target="_blank" 
+               aria-label="Follow us on TikTok"
+               class="social-link tiktok">
+              <i class="ri-tiktok-fill"></i> TikTok
+            </a>
+            <a href="https://wa.me/270725581629" 
+               target="_blank" 
+               aria-label="Chat with us on WhatsApp"
+               class="social-link whatsapp">
+              <i class="ri-whatsapp-fill"></i> WhatsApp
+            </a>
+            <a href="mailto:lefumlangeni@icloud.com" 
+               aria-label="Email us"
+               class="social-link email">
+              <i class="ri-mail-fill"></i> Email
+            </a>
+          </div>
+        </div>
+        <div class="contact__col">
+          <div class="contact__card" onclick="window.open('tel:0725581629')">
+            <span><i class="ri-phone-line"></i></span>
+            <h4>Call us</h4>
+            <h5>072 558 1629</h5>
+            <p>Mr Lefu Mlangeni</p>
+            <div class="contact__action">Click to call</div>
+          </div>
+        </div>
+        <div class="contact__col">
+          <div class="contact__card" onclick="openWhatsApp('Hi, I would like to get more information about your trips.')">
+            <span><i class="ri-whatsapp-line"></i></span>
+            <h4>WhatsApp us</h4>
+            <h5>072 558 1629</h5>
+            <p>Fast response guaranteed</p>
+            <div class="contact__action">Click to chat</div>
+          </div>
+        </div>
+        <div class="contact__col">
+          <div class="contact__card" onclick="openEmail()">
+            <span><i class="ri-mail-line"></i></span>
+            <h4>Email us</h4>
+            <h5>lefumlangeni@icloud.com</h5>
+            <p>For detailed inquiries</p>
+            <div class="contact__action">Click to email</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- WhatsApp Floating Button -->
+    <a href="https://wa.me/270725581629?text=Hello%20GlobeTrek%20Adventures!%20I%20would%20like%20to%20book%20a%20trip." 
+       class="whatsapp__float" 
+       target="_blank" 
+       aria-label="Chat on WhatsApp">
+      <i class="ri-whatsapp-fill"></i>
+      <span class="whatsapp__text">Book a Trip</span>
+    </a>
+
+    <section class="footer">
+      <div class="section__container footer__container">
+        <h4>GlobeTrek Adventures.</h4>
+        <p class="footer__tagline">
+          Creating unforgettable travel experiences since 2025. Your journey begins with us.
+        </p>
+        <div class="footer__socials">
+          <a href="https://www.tiktok.com/@globetrek.adventu6?_r=1&_t=ZS-93cFojYNXBH" 
+             target="_blank" 
+             aria-label="Follow us on TikTok">
+            <i class="ri-tiktok-fill"></i>
+          </a>
+          <a href="https://wa.me/270725581629?text=Hello%20GlobeTrek%20Adventures!%20I'm%20interested%20in%20your%20trips." 
+             target="_blank" 
+             aria-label="Chat with us on WhatsApp">
+            <i class="ri-whatsapp-fill"></i>
+          </a>
+          <a href="mailto:lefumlangeni@icloud.com" 
+             aria-label="Email us">
+            <i class="ri-mail-fill"></i>
+          </a>
+        </div>
+        <ul class="footer__nav">
+          <li><a href="#home">Home</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#discover">Destinations</a></li>
+          <li><a href="#blog">Blog</a></li>
+          <li><a href="#trips">Upcoming Trips</a></li>
+          <li><a href="#gallery">Gallery</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer__bar">
+        Copyright © 2026 Lefu Mlangeni. All rights reserved.
+      </div>
+    </section>
+
+    <script src="main.js"></script>
+  </body>
 </html>
