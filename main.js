@@ -59,7 +59,7 @@ ScrollReveal().reveal(".gallery__card", {
   interval: 400,
 });
 
-// ===== TRIPS DATA (IN ASCENDING DATE ORDER) =====
+// ===== TRIPS DATA =====
 const upcomingTrips = [
   {
     id: 1,
@@ -67,7 +67,7 @@ const upcomingTrips = [
     destination: "Port Elizabeth, Eastern Cape",
     date: "2026-04-24",
     endDate: "2026-04-27",
-    duration: "3 Days",
+    duration: "4 Days",
     price: 7560,
     category: "coastal",
     special: false,
@@ -101,7 +101,7 @@ const upcomingTrips = [
     destination: "Sun City, North West",
     date: "2026-07-03",
     endDate: "2026-07-06",
-    duration: "3 Days",
+    duration: "4 Days",
     price: 7000,
     category: "safari",
     special: false,
@@ -135,7 +135,7 @@ const upcomingTrips = [
     destination: "Mpumalanga Province",
     date: "2026-07-10",
     endDate: "2026-07-13",
-    duration: "3 Days",
+    duration: "4 Days",
     price: 6100,
     category: "mpumalanga",
     special: false,
@@ -145,7 +145,6 @@ const upcomingTrips = [
     deposit: 1500,
     depositDue: "2026-05-31",
     features: [
-      "Daily Breakfast",
       "God's Window viewpoint",
       "Bourke's Luck Potholes",
       "Blyde River Canyon",
@@ -158,10 +157,10 @@ const upcomingTrips = [
       { icon: "ri-hiking-line", label: "Hiking" }
     ],
     previewImages: [
-      { src: "assets/Mpumalanga3.jpeg", alt: "God's Window", caption: "Panoramic views" },
-      { src: "assets/Sabie.jpeg", alt: "Waterfalls", caption: "Beautiful waterfalls" },
-      { src: "assets/BlydeRiver.jpeg", alt: "Canyon", caption: "Blyde River Canyon" },
-      { src: "assets/Sudwala Lodge .jpeg", alt: "Nature", caption: "Natural beauty" }
+      { src: "assets/discover-1.jpeg", alt: "God's Window", caption: "Panoramic views" },
+      { src: "assets/gallery-4.jpeg", alt: "Waterfalls", caption: "Beautiful waterfalls" },
+      { src: "assets/blog-4.jpeg", alt: "Canyon", caption: "Blyde River Canyon" },
+      { src: "assets/gallery-3.jpeg", alt: "Nature", caption: "Natural beauty" }
     ]
   },
   {
@@ -170,7 +169,7 @@ const upcomingTrips = [
     destination: "Bela Bela, Limpopo",
     date: "2026-08-07",
     endDate: "2026-08-10",
-    duration: "3 Days",
+    duration: "4 Days",
     price: 5850,
     category: "safari",
     special: false,
@@ -180,7 +179,6 @@ const upcomingTrips = [
     deposit: 1800,
     depositDue: "2026-06-30",
     features: [
-      "Daily Breakfast",
       "Natural hot springs",
       "Game farm visits",
       "Spa treatments available",
@@ -205,7 +203,7 @@ const upcomingTrips = [
     destination: "Margate, KwaZulu-Natal",
     date: "2026-09-25",
     endDate: "2026-09-28",
-    duration: "3 Days",
+    duration: "4 Days",
     price: 6500,
     category: "coastal",
     special: false,
@@ -215,7 +213,6 @@ const upcomingTrips = [
     deposit: 2000,
     depositDue: "2026-08-31",
     features: [
-      "Daily Breakfast",
       "Beachfront accommodation",
       "Uvongo River Mouth",
       "Shopping at Margate Mall",
@@ -240,7 +237,7 @@ const upcomingTrips = [
     destination: "Cape Town, Western Cape",
     date: "2026-10-15",
     endDate: "2026-10-18",
-    duration: "3 Days",
+    duration: "4 Days",
     price: 9900,
     category: "cape-town",
     special: true,
@@ -254,7 +251,6 @@ const upcomingTrips = [
       "Travel from OR Tambo International Airport to Home",
       "Flight Tickets to and from",
       "Table Mountain Aerial Cableway",
-      "Daily Breakfast",
       "Robben Island Tour",
       "Sea Point & Camps Bay",
       "City shuttle service included",
@@ -266,45 +262,46 @@ const upcomingTrips = [
       { icon: "ri-bus-line", label: "Shuttle in CPT" }
     ],
     previewImages: [
-      { src: "assets/CitySightseeing.jpeg", alt: "Cape Town Bus City Sight Seeing", caption: "Cape Town City Sight Seeing" },
-      { src: "assets/Aquarium.jpeg", alt: "Aquarium", caption: "Visit to the Aquarium" },
-      { src: "assets/In a plane.jpeg", alt: "In a Plane", caption: "Views from the plane" },
-      { src: "assets/HotelView.jpeg", alt: "Axis Hotel", caption: "Beautiful Garden of The Hotel" }
-      
+      { src: "assets/discover-2.jpeg", alt: "Table Mountain", caption: "Table Mountain views" },
+      { src: "assets/gallery-5.jpeg", alt: "Robben Island", caption: "Historical tour" },
+      { src: "assets/gallery-1.jpeg", alt: "Sea Point", caption: "Coastal beauty" },
+      { src: "assets/blog-2.jpeg", alt: "City", caption: "City attractions" }
     ]
   }
 ];
 
-// Sort trips by date in ascending order initially
+// Sort trips by date
 upcomingTrips.sort((a, b) => new Date(a.date) - new Date(b.date));
 
-// ===== BOOKING MODAL STATE =====
+// ===== GLOBAL VARIABLES =====
 let currentBookingTrip = null;
 
-// ===== TRIPS MANAGEMENT =====
+// ===== DOM CONTENT LOADED =====
 document.addEventListener('DOMContentLoaded', function() {
-  // Initialize trips (already sorted by date)
+  // Initialize
   renderTrips(upcomingTrips);
+  initMobileMenu();
   
-  // Scroll to trips function
+  // Scroll to trips
   window.scrollToTrips = function() {
     const tripsSection = document.getElementById('trips');
     if (tripsSection) {
+      const offset = window.innerWidth <= 768 ? 120 : 100;
       window.scrollTo({
-        top: tripsSection.offsetTop - 100,
+        top: tripsSection.offsetTop - offset,
         behavior: 'smooth'
       });
     }
   };
   
-  // Open WhatsApp function
+  // WhatsApp function
   window.openWhatsApp = function(message) {
     const phone = "270725581629";
     const encodedMessage = encodeURIComponent(message);
     window.open(`https://wa.me/${phone}?text=${encodedMessage}`, '_blank');
   };
   
-  // Open Email function
+  // Email function
   window.openEmail = function() {
     const email = "lefumlangeni@icloud.com";
     const subject = "GlobeTrek Adventures Inquiry";
@@ -312,38 +309,35 @@ document.addEventListener('DOMContentLoaded', function() {
     window.location.href = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
   };
   
-  // Open Booking Modal function
+  // Open Booking Modal
   window.openBookingModal = function(tripId) {
     const trip = upcomingTrips.find(t => t.id === tripId);
     if (!trip) return;
     
     currentBookingTrip = trip;
     
-    // Set modal content
     document.getElementById('modalTripTitle').textContent = `Confirm Booking: ${trip.title}`;
     document.getElementById('modalTripName').textContent = trip.title;
     document.getElementById('modalTripDescription').textContent = trip.description;
     document.getElementById('modalTripDates').textContent = formatDateRange(trip.date, trip.endDate);
     document.getElementById('modalTripPrice').textContent = `R ${trip.price.toLocaleString('en-ZA')}`;
     document.getElementById('modalTripDuration').textContent = trip.duration;
-    document.getElementById('modalTripDeposit').textContent = `R ${trip.deposit.toLocaleString('en-ZA')} due by ${formatDate(trip.depositDue)}`;
+    document.getElementById('modalTripDeposit').textContent = `R ${trip.deposit.toLocaleString('en-ZA')} due ${formatDate(trip.depositDue)}`;
     
-    // Set preview images
-    const previewImagesContainer = document.getElementById('previewImages');
-    previewImagesContainer.innerHTML = trip.previewImages.map(img => `
+    const previewContainer = document.getElementById('previewImages');
+    previewContainer.innerHTML = trip.previewImages.map(img => `
       <div class="preview-image">
-        <img src="${img.src}" alt="${img.alt}">
+        <img src="${img.src}" alt="${img.alt}" loading="lazy">
         <div class="preview-image-overlay">${img.caption}</div>
       </div>
     `).join('');
     
-    // Show modal
     const modal = document.getElementById('bookingModal');
     modal.classList.add('active');
     document.body.style.overflow = 'hidden';
   };
   
-  // Close Booking Modal function
+  // Close Booking Modal
   window.closeBookingModal = function() {
     const modal = document.getElementById('bookingModal');
     modal.classList.remove('active');
@@ -351,7 +345,7 @@ document.addEventListener('DOMContentLoaded', function() {
     currentBookingTrip = null;
   };
   
-  // Confirm Booking function
+  // Confirm Booking
   window.confirmBooking = function() {
     if (!currentBookingTrip) return;
     
@@ -360,7 +354,7 @@ document.addEventListener('DOMContentLoaded', function() {
     closeBookingModal();
   };
   
-  // Sort trips functionality
+  // Sort trips
   const sortSelect = document.getElementById('sortTrips');
   if (sortSelect) {
     sortSelect.addEventListener('change', function() {
@@ -368,7 +362,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
   
-  // Search trips functionality
+  // Search trips
   const tripSearch = document.getElementById('tripSearch');
   if (tripSearch) {
     tripSearch.addEventListener('input', function() {
@@ -376,7 +370,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
   
-  // Clear search button
+  // Clear search
   const clearSearch = document.getElementById('clearSearch');
   if (clearSearch) {
     clearSearch.addEventListener('click', function() {
@@ -385,7 +379,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
   
-  // Close modal when clicking outside
+  // Close modal on outside click
   const bookingModal = document.getElementById('bookingModal');
   if (bookingModal) {
     bookingModal.addEventListener('click', function(e) {
@@ -395,14 +389,14 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
   
-  // Close modal with Escape key
+  // Close modal on Escape key
   document.addEventListener('keydown', function(e) {
     if (e.key === 'Escape') {
       closeBookingModal();
     }
   });
   
-  // Smooth scrolling for navigation links
+  // Smooth scrolling
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function(e) {
       const targetId = this.getAttribute('href');
@@ -411,32 +405,40 @@ document.addEventListener('DOMContentLoaded', function() {
       const targetElement = document.querySelector(targetId);
       if(targetElement) {
         e.preventDefault();
+        const offset = window.innerWidth <= 768 ? 120 : 100;
         window.scrollTo({
-          top: targetElement.offsetTop - 100,
+          top: targetElement.offsetTop - offset,
           behavior: 'smooth'
         });
         
-        // Update active nav link
+        // Update active link
         document.querySelectorAll('.nav__links .link a').forEach(link => {
           link.classList.remove('active');
         });
         this.classList.add('active');
+        
+        // Close mobile menu if open
+        const navLinks = document.querySelector('.nav__links');
+        if (navLinks.classList.contains('active')) {
+          navLinks.classList.remove('active');
+          document.querySelector('.nav__toggle i').className = 'ri-menu-line';
+        }
       }
     });
   });
   
-  // Navbar background on scroll
+  // Navbar scroll effect
   window.addEventListener('scroll', function() {
     const nav = document.querySelector('nav');
     if (window.scrollY > 50) {
-      nav.style.background = 'rgba(255, 255, 255, 0.15)';
+      nav.style.background = 'rgba(0, 0, 0, 0.8)';
       nav.style.backdropFilter = 'blur(20px)';
     } else {
-      nav.style.background = 'rgba(255, 255, 255, 0.1)';
+      nav.style.background = 'rgba(0, 0, 0, 0.3)';
       nav.style.backdropFilter = 'blur(10px)';
     }
     
-    // Update active nav link based on scroll position
+    // Update active nav link
     const sections = document.querySelectorAll('section[id]');
     const scrollY = window.pageYOffset;
     
@@ -456,7 +458,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
   
-  // Search functionality
+  // Search icon click
   const searchIcon = document.querySelector('.search span');
   if (searchIcon) {
     searchIcon.addEventListener('click', function() {
@@ -478,7 +480,6 @@ document.addEventListener('DOMContentLoaded', function() {
       searchInput.addEventListener('keypress', function(e) {
         if(e.key === 'Enter') {
           const searchTerm = this.value.toLowerCase();
-          // Redirect to trips section and filter
           scrollToTrips();
           setTimeout(() => {
             filterTrips(searchTerm);
@@ -498,45 +499,18 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
   
-  // WhatsApp floating button hover effect
-  const whatsappBtn = document.querySelector('.whatsapp__float');
-  if (whatsappBtn) {
-    whatsappBtn.setAttribute('title', 'Book a Trip on WhatsApp');
-    
-    whatsappBtn.addEventListener('mouseenter', function() {
-      this.style.width = 'auto';
-      this.style.padding = '0 2rem';
-      this.style.borderRadius = '35px';
-      const textSpan = this.querySelector('.whatsapp__text');
-      if (textSpan) {
-        textSpan.style.display = 'inline-block';
-      }
-    });
-    
-    whatsappBtn.addEventListener('mouseleave', function() {
-      this.style.width = '70px';
-      this.style.padding = '0';
-      this.style.borderRadius = '50%';
-      const textSpan = this.querySelector('.whatsapp__text');
-      if (textSpan) {
-        textSpan.style.display = 'none';
-      }
-    });
-  }
-  
-  // Add hover effects to all buttons
+  // Button hover effects
   const allButtons = document.querySelectorAll('.btn, .discover__btn, .btn-book');
   allButtons.forEach(button => {
     button.addEventListener('mouseenter', function() {
       this.style.transform = 'translateY(-2px)';
     });
-    
     button.addEventListener('mouseleave', function() {
       this.style.transform = 'translateY(0)';
     });
   });
   
-  // Add click effects to contact cards
+  // Contact card click effect
   const contactCards = document.querySelectorAll('.contact__card');
   contactCards.forEach(card => {
     card.addEventListener('click', function() {
@@ -547,24 +521,53 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
   
-  // Initialize navbar background
-  const nav = document.querySelector('nav');
-  if (nav && window.scrollY > 50) {
-    nav.style.background = 'rgba(255, 255, 255, 0.15)';
-    nav.style.backdropFilter = 'blur(20px)';
+  // WhatsApp float hover
+  const whatsappBtn = document.querySelector('.whatsapp__float');
+  if (whatsappBtn) {
+    whatsappBtn.setAttribute('title', 'Book a Trip on WhatsApp');
+    
+    whatsappBtn.addEventListener('mouseenter', function() {
+      if (window.innerWidth > 768) {
+        this.style.width = 'auto';
+        this.style.padding = '0 2rem';
+        this.style.borderRadius = '35px';
+        const textSpan = this.querySelector('.whatsapp__text');
+        if (textSpan) {
+          textSpan.style.display = 'inline-block';
+        }
+      }
+    });
+    
+    whatsappBtn.addEventListener('mouseleave', function() {
+      if (window.innerWidth > 768) {
+        this.style.width = '70px';
+        this.style.padding = '0';
+        this.style.borderRadius = '50%';
+        const textSpan = this.querySelector('.whatsapp__text');
+        if (textSpan) {
+          textSpan.style.display = 'none';
+        }
+      }
+    });
   }
   
-  // Add animated background effect
-  createBackgroundParticles();
+  // Initial navbar style
+  const nav = document.querySelector('nav');
+  if (nav && window.scrollY > 50) {
+    nav.style.background = 'rgba(0, 0, 0, 0.8)';
+    nav.style.backdropFilter = 'blur(20px)';
+  } else {
+    nav.style.background = 'rgba(0, 0, 0, 0.3)';
+    nav.style.backdropFilter = 'blur(10px)';
+  }
 });
 
-// Helper function to format date
+// ===== HELPER FUNCTIONS =====
 function formatDate(dateString) {
   const options = { day: 'numeric', month: 'short', year: 'numeric' };
   return new Date(dateString).toLocaleDateString('en-US', options);
 }
 
-// Helper function to format date range
 function formatDateRange(startDate, endDate) {
   const start = new Date(startDate);
   const end = new Date(endDate);
@@ -579,20 +582,17 @@ function formatDateRange(startDate, endDate) {
   return `${start.toLocaleDateString('en-US', options)} - ${end.toLocaleDateString('en-US', options)}`;
 }
 
-// Function to render trips
+// ===== RENDER TRIPS =====
 function renderTrips(trips) {
   const tripsGrid = document.getElementById('tripsGrid');
-  if (!tripsGrid) {
-    console.error('tripsGrid element not found!');
-    return;
-  }
+  if (!tripsGrid) return;
   
   if (trips.length === 0) {
     tripsGrid.innerHTML = `
       <div class="no-trips">
         <i class="ri-map-pin-line"></i>
         <h3>No trips found</h3>
-        <p>Try adjusting your search or filter criteria. Check back soon for more upcoming trips!</p>
+        <p>Try adjusting your search. Check back soon for more trips!</p>
       </div>
     `;
     return;
@@ -600,7 +600,7 @@ function renderTrips(trips) {
   
   tripsGrid.innerHTML = trips.map(trip => `
     <div class="trip-card ${trip.special ? 'special' : ''}" data-category="${trip.category}">
-      ${trip.special ? '<div class="special-badge">CITY SIGHTSEEING</div>' : ''}
+      ${trip.special ? '<div class="special-badge">SPECIAL</div>' : ''}
       <div class="trip-header">
         <h3>${trip.title}</h3>
         <div class="trip-date">${formatDateRange(trip.date, trip.endDate)}</div>
@@ -610,7 +610,7 @@ function renderTrips(trips) {
           ${trip.details.map(detail => `
             <div class="trip-detail">
               <i class="${detail.icon}"></i>
-              <div>${detail.label}</div>
+              <span>${detail.label}</span>
             </div>
           `).join('')}
         </div>
@@ -620,15 +620,7 @@ function renderTrips(trips) {
           <div class="price-note">Per person</div>
         </div>
         
-        <p><strong>Note:</strong> Non-refundable deposit of R${trip.deposit.toLocaleString('en-ZA')} due by ${formatDate(trip.depositDue)}</p>
-        
-        <p>${trip.description}</p>
-        
-        <ul class="trip-features">
-          ${trip.features.map(feature => `
-            <li><i class="ri-check-line"></i> ${feature}</li>
-          `).join('')}
-        </ul>
+        <p class="trip-description">${trip.description.substring(0, 100)}...</p>
         
         <div class="trip-actions">
           <button class="btn btn-book" onclick="openBookingModal(${trip.id})">
@@ -641,15 +633,9 @@ function renderTrips(trips) {
       </div>
     </div>
   `).join('');
-  
-  // Re-initialize ScrollReveal for newly loaded trip cards
-  ScrollReveal().reveal(".trip-card", {
-    ...scrollRevealOption,
-    interval: 400,
-  });
 }
 
-// Function to sort trips
+// ===== SORT TRIPS =====
 function sortTrips(sortBy) {
   let sortedTrips = [...upcomingTrips];
   
@@ -667,100 +653,137 @@ function sortTrips(sortBy) {
       sortedTrips.sort((a, b) => b.price - a.price);
       break;
     case 'duration':
-      sortedTrips.sort((a, b) => {
-        const aDays = parseInt(a.duration);
-        const bDays = parseInt(b.duration);
-        return aDays - bDays;
-      });
+      sortedTrips.sort((a, b) => parseInt(a.duration) - parseInt(b.duration));
       break;
   }
   
   renderTrips(sortedTrips);
 }
 
-// Function to filter trips
+// ===== FILTER TRIPS =====
 function filterTrips(searchTerm) {
   if (!searchTerm.trim()) {
     renderTrips(upcomingTrips);
     return;
   }
   
-  const filteredTrips = upcomingTrips.filter(trip => 
+  const filtered = upcomingTrips.filter(trip => 
     trip.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    trip.destination.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    trip.description.toLowerCase().includes(searchTerm.toLowerCase())
+    trip.destination.toLowerCase().includes(searchTerm.toLowerCase())
   );
   
-  renderTrips(filteredTrips);
+  renderTrips(filtered);
 }
 
-// Function to enquire about a trip
+// ===== ENQUIRE =====
 function enquireTrip(tripTitle) {
   const message = `Hello GlobeTrek Adventures! I have a question about the "${tripTitle}" trip. Could you please provide more information?`;
   openWhatsApp(message);
 }
 
-// Global WhatsApp function
-function openWhatsApp(message) {
-  const phone = "270725581629";
-  const encodedMessage = encodeURIComponent(message);
-  window.open(`https://wa.me/${phone}?text=${encodedMessage}`, '_blank');
+// ===== MOBILE MENU =====
+function initMobileMenu() {
+  const toggleBtn = document.querySelector('.nav__toggle');
+  const navLinks = document.querySelector('.nav__links');
+  
+  if (toggleBtn) {
+    toggleBtn.addEventListener('click', function() {
+      navLinks.classList.toggle('active');
+      const icon = this.querySelector('i');
+      if (navLinks.classList.contains('active')) {
+        icon.className = 'ri-close-line';
+      } else {
+        icon.className = 'ri-menu-line';
+      }
+    });
+  }
 }
 
-// Create animated background particles
-function createBackgroundParticles() {
+// ===== FILTER TOGGLE =====
+window.toggleFilterPanel = function() {
+  const filterPanel = document.querySelector('.trips__controls');
+  const toggleBtn = document.querySelector('.filter-toggle-btn');
+  
+  if (window.innerWidth <= 768) {
+    filterPanel.classList.toggle('active');
+    toggleBtn.classList.toggle('active');
+    
+    if (filterPanel.classList.contains('active')) {
+      toggleBtn.innerHTML = '<i class="ri-filter-3-line"></i> Hide Filters <i class="ri-arrow-up-s-line"></i>';
+    } else {
+      toggleBtn.innerHTML = '<i class="ri-filter-3-line"></i> Show Filters <i class="ri-arrow-down-s-line"></i>';
+    }
+  }
+};
+
+// ===== RESIZE HANDLER =====
+window.addEventListener('resize', function() {
+  if (window.innerWidth > 768) {
+    const filterPanel = document.querySelector('.trips__controls');
+    const toggleBtn = document.querySelector('.filter-toggle-btn');
+    
+    if (filterPanel) {
+      filterPanel.classList.remove('active');
+    }
+    if (toggleBtn) {
+      toggleBtn.classList.remove('active');
+      toggleBtn.innerHTML = '<i class="ri-filter-3-line"></i> Show Filters <i class="ri-arrow-down-s-line"></i>';
+    }
+    
+    // Reset WhatsApp button
+    const whatsappBtn = document.querySelector('.whatsapp__float');
+    if (whatsappBtn) {
+      whatsappBtn.style.width = '70px';
+      whatsappBtn.style.padding = '0';
+      whatsappBtn.style.borderRadius = '50%';
+      const textSpan = whatsappBtn.querySelector('.whatsapp__text');
+      if (textSpan) {
+        textSpan.style.display = 'none';
+      }
+    }
+  }
+});
+
+// ===== ANIMATED PARTICLES =====
+(function createParticles() {
   const container = document.querySelector('body');
-  const particleCount = 20;
+  const particleCount = 15;
   
   for (let i = 0; i < particleCount; i++) {
     const particle = document.createElement('div');
     particle.className = 'particle';
     
-    // Random properties
-    const size = Math.random() * 100 + 50;
+    const size = Math.random() * 150 + 50;
     const x = Math.random() * 100;
     const y = Math.random() * 100;
-    const blur = Math.random() * 20 + 10;
-    const opacity = Math.random() * 0.1 + 0.05;
-    const animationDuration = Math.random() * 20 + 20;
-    const animationDelay = Math.random() * 10;
+    const duration = Math.random() * 30 + 20;
+    const delay = Math.random() * 10;
     
-    // Apply styles
     particle.style.cssText = `
       position: fixed;
       width: ${size}px;
       height: ${size}px;
-      background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05));
+      background: linear-gradient(135deg, rgba(37, 99, 235, 0.1), rgba(59, 130, 246, 0.05));
       border-radius: 50%;
-      filter: blur(${blur}px);
-      opacity: ${opacity};
+      filter: blur(${Math.random() * 30 + 20}px);
       left: ${x}%;
       top: ${y}%;
       z-index: -1;
       pointer-events: none;
-      animation: float ${animationDuration}s ease-in-out ${animationDelay}s infinite;
+      animation: floatParticle ${duration}s ease-in-out ${delay}s infinite;
     `;
     
     container.appendChild(particle);
   }
   
-  // Add the floating animation keyframes
   const style = document.createElement('style');
   style.textContent = `
-    @keyframes float {
-      0%, 100% {
-        transform: translate(0, 0) rotate(0deg);
-      }
-      25% {
-        transform: translate(10px, -10px) rotate(90deg);
-      }
-      50% {
-        transform: translate(0, -20px) rotate(180deg);
-      }
-      75% {
-        transform: translate(-10px, -10px) rotate(270deg);
-      }
+    @keyframes floatParticle {
+      0%, 100% { transform: translate(0, 0) rotate(0deg); }
+      25% { transform: translate(20px, -20px) rotate(5deg); }
+      50% { transform: translate(0, -40px) rotate(10deg); }
+      75% { transform: translate(-20px, -20px) rotate(5deg); }
     }
   `;
   document.head.appendChild(style);
-}
+})();
