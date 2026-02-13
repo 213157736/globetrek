@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes" />
     <link
       href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css"
       rel="stylesheet"
@@ -16,18 +16,23 @@
       <nav>
         <div class="nav__bar">
           <div class="nav__logo"><a href="#">GlobeTrek Adventures.</a></div>
-          <ul class="nav__links">
-            <li class="link"><a href="#home">Home</a></li>
-            <li class="link"><a href="#about">About Us</a></li>
-            <li class="link"><a href="#discover">Destinations</a></li>
-            <li class="link"><a href="#blog">Blog</a></li>
-            <li class="link"><a href="#trips">Upcoming Trips</a></li>
-            <li class="link"><a href="#gallery">Gallery</a></li>
-            <li class="link"><a href="#contact">Contact</a></li>
-            <li class="link search">
-              <span><i class="ri-search-line"></i></span>
-            </li>
-          </ul>
+          <div class="nav__menu">
+            <ul class="nav__links">
+              <li class="link"><a href="#home">Home</a></li>
+              <li class="link"><a href="#about">About Us</a></li>
+              <li class="link"><a href="#discover">Destinations</a></li>
+              <li class="link"><a href="#blog">Blog</a></li>
+              <li class="link"><a href="#trips">Upcoming Trips</a></li>
+              <li class="link"><a href="#gallery">Gallery</a></li>
+              <li class="link"><a href="#contact">Contact</a></li>
+              <li class="link search">
+                <span><i class="ri-search-line"></i></span>
+              </li>
+            </ul>
+          </div>
+          <div class="nav__toggle">
+            <i class="ri-menu-line"></i>
+          </div>
         </div>
       </nav>
       <div class="section__container header__container">
@@ -60,11 +65,11 @@
           </p>
           <div class="about__flex">
             <div class="about__card">
-              <h4>13</h4>
+              <h4>268</h4>
               <p>Completed Trips</p>
             </div>
             <div class="about__card">
-              <h4>2</h4>
+              <h4>42</h4>
               <p>Tour Guides</p>
             </div>
             <div class="about__card">
@@ -190,7 +195,23 @@
           Book your adventure with us! All trips are sorted by departure date.
         </p>
         
+        <!-- Mobile Filter Toggle -->
+        <div class="mobile-filter-toggle">
+          <button class="filter-toggle-btn" onclick="toggleFilterPanel()">
+            <i class="ri-filter-3-line"></i> Show Filters
+            <i class="ri-arrow-down-s-line"></i>
+          </button>
+        </div>
+        
         <div class="trips__controls">
+          <div class="trips__search">
+            <div class="search-wrapper">
+              <i class="ri-search-line"></i>
+              <input type="text" id="tripSearch" placeholder="Search trips by destination...">
+            </div>
+            <button class="btn btn-clear" id="clearSearch">Clear</button>
+          </div>
+          
           <div class="trips__filter">
             <label for="sortTrips">Sort by:</label>
             <select id="sortTrips">
@@ -200,13 +221,6 @@
               <option value="price-desc">Price (High to Low)</option>
               <option value="duration">Duration</option>
             </select>
-          </div>
-          <div class="trips__search">
-            <div class="search-wrapper">
-              <i class="ri-search-line"></i>
-              <input type="text" id="tripSearch" placeholder="Search trips by destination or name...">
-            </div>
-            <button class="btn btn-clear" id="clearSearch">Clear</button>
           </div>
         </div>
         
@@ -282,16 +296,16 @@
             
             <div class="confirmation-options">
               <button class="btn btn-confirm" onclick="confirmBooking()">
-                <i class="ri-whatsapp-line"></i> Yes, Book Now via WhatsApp
+                <i class="ri-whatsapp-line"></i> Yes, Book Now
               </button>
               <button class="btn btn-secondary" onclick="closeBookingModal()">
-                <i class="ri-close-line"></i> No, Not Yet
+                <i class="ri-close-line"></i> Not Yet
               </button>
             </div>
             
             <div class="booking-note">
               <i class="ri-information-line"></i>
-              <p>Booking requires a non-refundable deposit. Full payment details will be provided via WhatsApp.</p>
+              <p>Non-refundable deposit required</p>
             </div>
           </div>
         </div>
@@ -347,32 +361,8 @@
               <p>Panorama Chalets</p>
             </div>
           </div>
-           <div class="gallery__card">
-            <img src="assets/Background.jpeg" alt="gallery" />
-            <div class="gallery__content">
-              <h4>Mpumalanga</h4>
-              <p>Graskop</p>
         </div>
       </div>
-       <div class="gallery__card">
-            <img src="assets/blog-1.jpeg" alt="gallery" />
-            <div class="gallery__content">
-              <h4>Mpumalanga</h4>
-              <p>Blyde River Canyon</p>
-        </div>
-      </div>
-       <div class="gallery__card">
-            <img src="assets/blog-2.jpeg" alt="gallery" />
-            <div class="gallery__content">
-              <h4>Mpumalanga</h4>
-              <p>Graskop George</p>
-                  </div>
-      </div>
-       <div class="gallery__card">
-            <img src="assets/BlydeRiver.jpeg" alt="gallery" />
-            <div class="gallery__content">
-              <h4>Mpumalanga</h4>
-              <p>Boat Cruise</p>
     </section>
 
     <section class="contact" id="contact">
@@ -445,7 +435,7 @@
       <div class="section__container footer__container">
         <h4>GlobeTrek Adventures.</h4>
         <p class="footer__tagline">
-          Creating unforgettable travel experiences since 2025. Your journey begins with us.
+          Creating unforgettable travel experiences since 2020. Your journey begins with us.
         </p>
         <div class="footer__socials">
           <a href="https://www.tiktok.com/@globetrek.adventu6?_r=1&_t=ZS-93cFojYNXBH" 
