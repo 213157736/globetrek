@@ -418,10 +418,13 @@ document.addEventListener('DOMContentLoaded', function() {
         this.classList.add('active');
         
         // Close mobile menu if open
-        const navLinks = document.querySelector('.nav__links');
-        if (navLinks.classList.contains('active')) {
-          navLinks.classList.remove('active');
+        const navMenu = document.querySelector('.nav__menu');
+        const overlay = document.querySelector('.nav__overlay');
+        if (navMenu && navMenu.classList.contains('active')) {
+          navMenu.classList.remove('active');
+          overlay.classList.remove('active');
           document.querySelector('.nav__toggle i').className = 'ri-menu-line';
+          document.body.style.overflow = '';
         }
       }
     });
@@ -540,7 +543,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     whatsappBtn.addEventListener('mouseleave', function() {
       if (window.innerWidth > 768) {
-        this.style.width = '70px';
+        this.style.width = '56px';
         this.style.padding = '0';
         this.style.borderRadius = '50%';
         const textSpan = this.querySelector('.whatsapp__text');
@@ -684,16 +687,71 @@ function enquireTrip(tripTitle) {
 // ===== MOBILE MENU =====
 function initMobileMenu() {
   const toggleBtn = document.querySelector('.nav__toggle');
-  const navLinks = document.querySelector('.nav__links');
+  const navMenu = document.querySelector('.nav__menu');
   
-  if (toggleBtn) {
-    toggleBtn.addEventListener('click', function() {
-      navLinks.classList.toggle('active');
+  // Create overlay element
+  const overlay = document.createElement('div');
+  overlay.className = 'nav__overlay';
+  document.body.appendChild(overlay);
+  
+  if (toggleBtn && navMenu) {
+    // Toggle menu
+    toggleBtn.addEventListener('click', function(e) {
+      e.stopPropagation();
+      navMenu.classList.toggle('active');
+      overlay.classList.toggle('active');
+      
+      // Change icon
       const icon = this.querySelector('i');
-      if (navLinks.classList.contains('active')) {
+      if (navMenu.classList.contains('active')) {
         icon.className = 'ri-close-line';
+        document.body.style.overflow = 'hidden';
       } else {
         icon.className = 'ri-menu-line';
+        document.body.style.overflow = '';
+      }
+    });
+    
+    // Close menu when clicking on overlay
+    overlay.addEventListener('click', function() {
+      navMenu.classList.remove('active');
+      overlay.classList.remove('active');
+      const icon = toggleBtn.querySelector('i');
+      icon.className = 'ri-menu-line';
+      document.body.style.overflow = '';
+    });
+    
+    // Close menu when clicking on a link
+    const navLinks = navMenu.querySelectorAll('.link a');
+    navLinks.forEach(link => {
+      link.addEventListener('click', function() {
+        navMenu.classList.remove('active');
+        overlay.classList.remove('active');
+        const icon = toggleBtn.querySelector('i');
+        icon.className = 'ri-menu-line';
+        document.body.style.overflow = '';
+      });
+    });
+    
+    // Close menu on escape key
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape' && navMenu.classList.contains('active')) {
+        navMenu.classList.remove('active');
+        overlay.classList.remove('active');
+        const icon = toggleBtn.querySelector('i');
+        icon.className = 'ri-menu-line';
+        document.body.style.overflow = '';
+      }
+    });
+    
+    // Handle resize
+    window.addEventListener('resize', function() {
+      if (window.innerWidth > 768 && navMenu.classList.contains('active')) {
+        navMenu.classList.remove('active');
+        overlay.classList.remove('active');
+        const icon = toggleBtn.querySelector('i');
+        icon.className = 'ri-menu-line';
+        document.body.style.overflow = '';
       }
     });
   }
@@ -733,7 +791,7 @@ window.addEventListener('resize', function() {
     // Reset WhatsApp button
     const whatsappBtn = document.querySelector('.whatsapp__float');
     if (whatsappBtn) {
-      whatsappBtn.style.width = '70px';
+      whatsappBtn.style.width = '56px';
       whatsappBtn.style.padding = '0';
       whatsappBtn.style.borderRadius = '50%';
       const textSpan = whatsappBtn.querySelector('.whatsapp__text');
